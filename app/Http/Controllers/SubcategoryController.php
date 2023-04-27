@@ -13,6 +13,7 @@ class SubcategoryController extends Controller
     {
         $this->middleware('auth:api')->except(['index']);
     }
+    
     /**
      * Display a listing of the resource.
      */
