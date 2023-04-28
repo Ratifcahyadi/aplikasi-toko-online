@@ -130,8 +130,8 @@ class SliderController extends Controller
     public function destroy(Slider $Slider)
     {
         File::delete('uploads/' . $Slider->gambar);
-        $Slider->delete();
 
+        $Slider->delete();
         return response()->json([
             'message' => 'success'
         ]);

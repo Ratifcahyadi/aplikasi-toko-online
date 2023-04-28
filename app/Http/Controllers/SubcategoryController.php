@@ -133,8 +133,8 @@ class SubcategoryController extends Controller
     public function destroy(Subcategory $subcategory)
     {
         File::delete('uploads/' . $subcategory->gambar);
-        $subcategory->delete();
 
+        $subcategory->delete();
         return response()->json([
             'message' => 'success'
         ]);
