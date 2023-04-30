@@ -43,8 +43,9 @@ class MemberController extends Controller
             'kecamatan' => 'required',	
             'detail_alamat' => 'required',	
             'no_hp' => 'required',	
-            'email' => 'required',	
-            'password' => 'required',
+            'email' => 'required|email',	
+            'password' => 'required|same:konfirmasi_password',
+            'konfirmasi_password' => 'required|same:password'
         ]);
 
         if ($validator->fails()) {
@@ -55,60 +56,11 @@ class MemberController extends Controller
         }
 
         $input = $request->all();
-
+        $input['password'] = bcrypt($request->password);
+        unset($input['konfirmasi_password']);
         $member = Member::create($input);
         // $member = mem$member::create($request->all());
-
         return response()->json([
-            'data' => $member
-        ]);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Member $member)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Member $member)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Member $member)
-    {
-        $validator = Validator::make($request->all(), [
-            'nama_member' => 'required',
-            'provinsi' => 'required',
-            'kabupaten' => 'required',	
-            'kecamatan' => 'required',	
-            'detail_alamat' => 'required',	
-            'no_hp' => 'required',	
-            'email' => 'required',	
-            'password' => 'required',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(
-                $validator->errors(),
-                422
-            );
-        }
-
-        $input = $request->all();
-
-        $member->update($input);
-        // $member->update($request->all());
-        return response()->json([
-            'message' => 'success',
             'data' => $member
         ]);
     }
