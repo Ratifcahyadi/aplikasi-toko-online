@@ -11,17 +11,38 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    public function login()
+    public function index()
     {
+        return view('auth.login');
+    }
+    
+    public function login(Request $request)
+    {
+
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
         $credentials = request(['email', 'password']);
         // dd($credentials);
 
-        if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['Email atau Password salah!'], 401);
+        // if (!$token = auth()->attempt($credentials)) {
+        //     return response()->json(['Email atau Password salah!'], 401);
+        // }
+
+        // return 
+        // $this->respondWithToken($token);
+        if (auth()->attempt($credentials)) {
+            // Auth::guard('api')->attempt($credentials);
+            $token = Auth::guard('api')->attempt($credentials);
+
+            // dd($token);
+            cookie()->queue(cookie('token', $token, 60));
+            return redirect('/dashboard');
         }
 
-        return 
-        $this->respondWithToken($token);
+        return back()->withErrors(['error' => 'Email atau Password Salah!']);
     }
 
     protected function respondWithToken($token)
@@ -123,13 +144,15 @@ class AuthController extends Controller
 
     public function logout()
     {
-        auth()->logout();
-        return response()->json(['message' => 'Successfully logged out']);
+        Session::flush();
+        return redirect('/login');
+        // auth()->logout();
+        // return response()->json(['message' => 'Successfully logged out']);
     }
 
     public function logout_member()
     {
         Session::flush();
-        redirect('/login');
+        return redirect('/login_member');
     }
 }
