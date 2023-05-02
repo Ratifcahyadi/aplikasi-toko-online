@@ -8,13 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Login</title>
 
     <!-- Custom fonts for this template-->
     <link href="/sb-admin-2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
-        href="/sb-admin-2/https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        href="https://fonts.googleapis.com/css?family=Poppins:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
@@ -62,11 +63,11 @@
                                         </div>
                                     @endif
 
-                                    <form class="user" method="POST" action="/login">
+                                    <form class="form-login user" method="POST" action="/login">
                                         @csrf
                                         <div class="form-group">
                                             <label class="text-white" for="email">Email</label>
-                                            <input name="email" type="email" class="form-control form-control-user rounded-lg border-bottom-warning"
+                                            <input name="email" type="email" class="form-control form-control-user rounded-lg border-bottom-warning email"
                                             id="exampleInputEmail" aria-describedby="emailHelp"
                                             placeholder="Masukkan Email...">
                                             <small class="text-danger">
@@ -77,7 +78,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="text-white" for="email">Password</label>
-                                            <input name="password" type="password" class="form-control form-control-user rounded-lg border-bottom-warning"
+                                            <input name="password" type="password" class="form-control form-control-user rounded-lg border-bottom-warning password"
                                                 id="exampleInputPassword" placeholder="Masukkan Password...">
                                                 <small class="text-danger">
                                                     @error('password')
@@ -131,6 +132,50 @@
     <!-- Custom scripts for all pages-->
     <script src="/sb-admin-2/js/sb-admin-2.min.js"></script>
 
+    <script>
+        $(function(){
+        // fungsi untuk membuat cookie
+            function setCookie(name, value, days) {
+                var expires = "";
+                if (days) {
+                    var date = new Date();
+                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                    expires = "; expires=" + date.toUTCString();
+                }
+                document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+            }
+
+
+        $('.form-login').submit(function(e){
+        e.preventDefault();
+        
+        const email = $('.email').val();
+        const password = $('.password').val();
+        const csrf_token = $('meta[name="csrf-token"]').attr('content');
+
+        // console.log(csrf_token)
+
+                $.ajax({
+                    url: '/login',
+                    type: 'POST',
+                    data: {
+                        email: email,
+                        password: password,
+                        _token: csrf_token
+                    },
+                    success: function(data) {
+                        if (!data.success) {
+                            alert(data.message)
+                        }
+
+                        // setCookie('token', data.token, 7)
+                        localStorage.setItem('token', data.token)
+                        window.location.href = '/dashboard';
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

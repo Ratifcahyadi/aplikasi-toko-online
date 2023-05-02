@@ -11,11 +11,18 @@ class CategoryController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->except(['index']);
+        $this->middleware('auth')->only(['list']);
+        $this->middleware('auth:api')->only(['store', 'update', 'delete']);
     }
     /**
      * Display a listing of the resource.
      */
+
+    public function list()
+    {
+        $this->middleware('auth');
+        return view('kategori.index');
+    }
     public function index()
     {
         $categories = Category::all();
@@ -64,6 +71,7 @@ class CategoryController extends Controller
         // $category = Category::create($request->all());
 
         return response()->json([
+            'success' => true,
             'data' => $category
         ]);
     }
@@ -121,6 +129,7 @@ class CategoryController extends Controller
         $category->update($input);
         // $category->update($request->all());
         return response()->json([
+            'success' => true,
             'message' => 'success',
             'data' => $category
         ]);
@@ -135,6 +144,7 @@ class CategoryController extends Controller
 
         $category->delete();
         return response()->json([
+            'success' => true,
             'message' => 'success'
         ]);
     }
