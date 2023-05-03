@@ -28,6 +28,7 @@ class CategoryController extends Controller
     {
         $categories = Category::all();
         return response()->json([
+            'success' => true,
             'data' => $categories
         ]);
     }
@@ -83,6 +84,7 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         return response()->json([
+            'success' => true,
             'data' => $category
         ]);
     }

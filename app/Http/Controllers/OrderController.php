@@ -133,6 +133,15 @@ class OrderController extends Controller
         ]);
     }
 
+    public function baru()
+    {
+        $orders = Order::where('status', 'Baru')->get();
+
+        return response()->json([
+            'data' => $orders
+        ]);
+    }
+
     public function dikonfirmasi()
     {
         $orders = Order::where('status', 'Dikonfirmasi')->get();

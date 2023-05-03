@@ -87,6 +87,7 @@ class SubcategoryController extends Controller
     public function show(Subcategory $subcategory)
     {
         return response()->json([
+            'success' => true,
             'data' => $subcategory
         ]);
     }

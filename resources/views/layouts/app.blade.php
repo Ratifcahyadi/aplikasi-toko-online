@@ -8,6 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    {{-- favicon --}}
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title')</title>
@@ -283,9 +289,10 @@
                         <a class="collapse-item text-warning" href="/kategori">Data Kategori</a>
                         <a class="collapse-item text-warning" href="/subkategori">Data Subkategori</a>
                         <a class="collapse-item text-warning" href="/slider">Data Slider</a>
-                        <a class="collapse-item text-warning" href="/member">Data Member</a>
+                        <a class="collapse-item text-warning" href="/barang">Data Barang</a>
                         <a class="collapse-item text-warning" href="/testimoni">Data Testimoni</a>
-                        <a class="collapse-item text-warning" href="/reviews">Data Reviews</a>
+                        {{-- <a class="collapse-item text-warning" href="/member">Data Member</a> --}}
+                        {{-- <a class="collapse-item text-warning" href="/reviews">Data Reviews</a> --}}
                     </div>
                 </div>
             </li>

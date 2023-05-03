@@ -123,7 +123,7 @@
                         url: 'api/categories/' + id,
                         type: "DELETE",
                         headers: {
-                            "Authorization": "Bearer " + 'token'
+                            "Authorization": "Bearer " + token
                         },
                         success: function(data) {
                             if (data.message == 'success') {

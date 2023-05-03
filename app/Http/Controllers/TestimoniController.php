@@ -11,8 +11,19 @@ class TestimoniController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->except(['index']);
+        $this->middleware('auth')->only(['list']);
+        $this->middleware('auth:api')->only(['store', 'update', 'destroy']);
     }
+    /**
+     * Display a listing of the resource.
+     */
+
+    public function list()
+    {
+        $this->middleware('auth');
+        return view('testimoni.index');
+    }
+    
     /**
      * Display a listing of the resource.
      */
@@ -20,6 +31,7 @@ class TestimoniController extends Controller
     {
         $testimony = Testimoni::all();
         return response()->json([
+            'success' => true,
             'data' => $testimony
         ]);
     }
@@ -64,6 +76,7 @@ class TestimoniController extends Controller
         // $Testimoni = Testimoni::create($request->all());
 
         return response()->json([
+            'success' => true,
             'data' => $Testimoni
         ]);
     }
@@ -74,6 +87,7 @@ class TestimoniController extends Controller
     public function show(Testimoni $Testimoni)
     {
         return response()->json([
+            'success' => true,
             'data' => $Testimoni
         ]);
     }
@@ -121,6 +135,7 @@ class TestimoniController extends Controller
         $Testimoni->update($input);
         // $Testimoni->update($request->all());
         return response()->json([
+            'success' => true,
             'message' => 'success',
             'data' => $Testimoni
         ]);
@@ -135,6 +150,7 @@ class TestimoniController extends Controller
 
         $Testimoni->delete();
         return response()->json([
+            'success' => true,
             'message' => 'success'
         ]);
     }

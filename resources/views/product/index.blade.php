@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Data Slider')
+@section('title', 'Data Produk Barang')
 
 @section('content')
     
@@ -20,9 +20,18 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Nama Slider</th>
-                            <th>Deskripsi</th>
+                            <th>Kategori</th>
+                            <th>Subkategori</th>
+                            <th>Nama Barang</th>
                             <th>Gambar</th>
+                            <th>Deskripsi</th>
+                            <th>Harga</th>
+                            <th>Diskon</th>
+                            <th>Bahan</th>
+                            <th>Tags</th>
+                            <th>Sku</th>
+                            <th>Ukuran</th>
+                            <th>Warna</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -36,7 +45,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content bg-purple-900">
             <div class="modal-header bg-gradient-linear">
-                <h5 class="modal-title text-white font-weight-bold bold ">Form Slider</h5>
+                <h5 class="modal-title text-white font-weight-bold bold ">Form Produk</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -44,14 +53,26 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form class="form-Slider text-warning">
+                        <form class="form-kategori text-warning">
                             <div class="form-group">
-                                <label for="">Nama Slider</label>
-                                <input type="text" name="nama_slider" id="nama_slider" placeholder="Masukkan nama Slider produk..." class="form-control" required>
+                                <label for="">Kategori</label>
+                                <select name="id_kategori" id="id_kategori" class="form-control">
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->nama_kategori }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
-                                <label for="">Deskripsi</label>
-                                <textarea class="form-control" required name="deskripsi" placeholder="Masukkan deskripsi produk..." id="deskripsi"></textarea>
+                                <label for="">Sub Kategori</label>
+                                <select name="id_subkategori" id="id_subkategori" class="form-control">
+                                    @foreach ($subcategories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->nama_subkategori }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Nama Barang</label>
+                                <input type="text" name="nama_barang" id="nama_barang" placeholder="Masukkan nama produk..." class="form-control" required>
                             </div>
                             <label for="">Gambar</label>
                             <div class="form-group">
@@ -59,6 +80,38 @@
                                     <input type="file" class="custom-file-input" id="gambar" name="gambar">
                                     <label class="custom-file-label" for="gambar">Masukkan foto produk...</label>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Deskripsi</label>
+                                <textarea class="form-control" required name="deskripsi" placeholder="Masukkan deskripsi produk..." id="deskripsi"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Harga</label>
+                                <input type="number" name="harga" id="harga" placeholder="Masukkan harga produk..." class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Diskon</label>
+                                <input type="number" name="diskon" id="diskon" placeholder="Masukkan diskon produk..." class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Bahan</label>
+                                <input type="text" name="bahan" id="bahan" placeholder="Masukkan tags produk..." class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Stock Keeping Unit (SKU)</label>
+                                <input type="text" name="sku" id="sku" placeholder="Masukkan sku produk..." class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Tags Produk</label>
+                                <input type="text" name="tags" id="tags" placeholder="Masukkan tags produk..." class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Ukuran</label>
+                                <input type="text" name="ukuran" id="ukuran" placeholder="Masukkan ukuran produk..." class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Warna</label>
+                                <input type="text" name="warna" id="warna" placeholder="Masukkan warna produk..." class="form-control" required>
                             </div>
                             <div class="form-group mb-0">
                                 <button type="submit" class="btn btn-warning btn-block">Submit</button>
@@ -92,18 +145,27 @@
     $(function(){
 
         $.ajax({
-            url: '/api/sliders',
+            url: '/api/products',
             success: function({data}) {
                 let row;
                 data.map(function(val, index){
                     row += `
                     <tr>
                         <td>${parseInt(index)+1}</td>
-                        <td>${val.nama_slider}</td>
-                        <td>${val.deskripsi}</td>
+                        <td>${val.category.nama_kategori}</td>
+                        <td>${val.subcategory.nama_subkategori}</td>
+                        <td>${val.nama_barang}</td>
                         <td><img src="/uploads/${val.gambar}" width="300" class="rounded"</td>
-                        <td>
-                            <a data-toggle="modal" class="btn btn-warning modal-ubah"  href="#modal-form" data-id="${val.id}">Edit</a>
+                        <td>${val.deskripsi}</td>
+                        <td>${val.harga}</td>
+                        <td>${val.diskon}</td>
+                        <td>${val.bahan}</td>
+                        <td>${val.tags}</td>
+                        <td>${val.sku}</td>
+                        <td>${val.ukuran}</td>
+                        <td>${val.warna}</td>
+                        <td class="d-flex flex-column align-content-lg-between">
+                            <a data-toggle="modal" class="btn btn-warning modal-ubah mb-1"  href="#modal-form" data-id="${val.id}">Edit</a>
                             <a class="btn btn-outline-danger btn-hapus" href="#" data-id="${val.id}">Hapus</a>
                         </td>
                     </tr>
@@ -120,7 +182,7 @@
 
                 if (confirm_dialog) {
                     $.ajax({
-                        url: 'api/sliders/' + id,
+                        url: 'api/products/' + id,
                         type: "DELETE",
                         headers: {
                             "Authorization": "Bearer " + token
@@ -138,17 +200,17 @@
         $('.modal-tambah').click(function(){
             $('modal-form').modal('show');
 
-            $('input[name="nama_slider"]').val('');
+            $('input[name="nama_kategori"]').val('');
             $('textarea[name="deskripsi"]').val('');
 
-            $('.form-Slider').submit(function(e){
+            $('.form-kategori').submit(function(e){
                 e.preventDefault();
 
                 const token = localStorage.getItem('token');
                 const frmdata = new FormData(this);
     
                 $.ajax({
-                    url: 'api/sliders',
+                    url: 'api/products',
                     type: 'POST',
                     data: frmdata,
                     cache: false,
@@ -174,19 +236,26 @@
 
             const id = $(this).data('id');
 
-            $.get('/api/sliders/' + id, function({data}){
-                $('input[name="nama_slider"]').val(data.nama_slider);
+            $.get('/api/products/' + id, function({data}){
+                $('input[name="nama_barang"]').val(data.nama_barang);
                 $('textarea[name="deskripsi"]').val(data.deskripsi);
+                $('input[name="harga"]').val(data.harga);
+                $('input[name="diskon"]').val(data.diskon);
+                $('input[name="bahan"]').val(data.bahan);
+                $('input[name="tags"]').val(data.tags);
+                $('input[name="sku"]').val(data.sku);
+                $('input[name="ukuran"]').val(data.ukuran);
+                $('input[name="warna"]').val(data.warna);
             });
 
-            $('.form-Slider').submit(function(e){
+            $('.form-kategori').submit(function(e){
                 e.preventDefault();
 
                 const token = localStorage.getItem('token');
                 const frmdata = new FormData(this);
 
                 $.ajax({
-                    url: `api/sliders/${id}?_method=PUT`,
+                    url: `api/products/${id}?_method=PUT`,
                     type: 'POST',
                     data: frmdata,
                     cache: false,

@@ -47,14 +47,14 @@
                     <div class="col-lg-12">
                         <form class="form-kategori text-warning">
                             <div class="form-group">
-                                <div class="form-group">
-                                    <label for="">Kategori</label>
-                                    <select name="id_kategori" id="id_kategori" class="form-control">
-                                        @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->nama_kategori }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                <label for="">Kategori</label>
+                                <select name="id_kategori" id="id_kategori" class="form-control">
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->nama_kategori }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label for="">Nama Subkategori</label>
                                 <input type="text" name="nama_subkategori" id="nama_subkategori" placeholder="Masukkan nama kategori produk..." class="form-control" required>
                             </div>
