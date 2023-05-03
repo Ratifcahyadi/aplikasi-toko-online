@@ -192,7 +192,7 @@
             <form
                 class="d-none d-sm-inline-block form-inline ml-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                 <div class="input-group">
-                    <input type="text" class="placeholder-white form-control border-0 small" style="background: #02d2ff" placeholder="Search for..."
+                    <input type="text" class="placeholder-white form-control border-0 small" style="background: #604bff79" placeholder="Search for..."
                         aria-label="Search" aria-describedby="basic-addon2">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="button">

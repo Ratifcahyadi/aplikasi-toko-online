@@ -12,7 +12,7 @@ class CategoryController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->only(['list']);
-        $this->middleware('auth:api')->only(['store', 'update', 'delete']);
+        $this->middleware('auth:api')->only(['store', 'update', 'destroy']);
     }
     /**
      * Display a listing of the resource.
@@ -23,6 +23,7 @@ class CategoryController extends Controller
         $this->middleware('auth');
         return view('kategori.index');
     }
+    
     public function index()
     {
         $categories = Category::all();
@@ -63,7 +64,7 @@ class CategoryController extends Controller
         if ($request->has('gambar')) {
             $gambar = $request->file('gambar');
             $nama_gambar = time() . rand(1, 9) . '.' . $gambar->getClientOriginalExtension();
-            $gambar->move('uploads', $nama_gambar);
+            $gambar->move('upload_images', $nama_gambar);
             $input['gambar'] = $nama_gambar;
         }
 
@@ -116,11 +117,11 @@ class CategoryController extends Controller
 
         if ($request->has('gambar')) {
 
-            File::delete('uploads/' . $category->gambar);
+            File::delete('upload_images' . $category->gambar);
 
             $gambar = $request->file('gambar');
             $nama_gambar = time() . rand(1, 9) . '.' . $gambar->getClientOriginalExtension();
-            $gambar->move('uploads', $nama_gambar);
+            $gambar->move('upload_images', $nama_gambar);
             $input['gambar'] = $nama_gambar;
         } else {
             unset($input['gambar']);
@@ -140,7 +141,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        File::delete('uploads/' . $category->gambar);
+        File::delete('upload_images' . $category->gambar);
 
         $category->delete();
         return response()->json([

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -11,7 +12,8 @@ class SubcategoryController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->except(['index']);
+        $this->middleware('auth')->only(['list']);
+        $this->middleware('auth:api')->only(['store', 'update', 'destroy']);
     }
     
     /**
@@ -19,10 +21,18 @@ class SubcategoryController extends Controller
      */
     public function index()
     {
-        $subcategories = Subcategory::all();
+        $subcategories = Subcategory::with('category')->get();
+
         return response()->json([
             'data' => $subcategories
         ]);
+    }
+
+    public function list()
+    {
+        // $this->middleware('auth');
+        $categories = Category::all();
+        return view('subkategori.index', compact('categories'));
     }
 
     /**
@@ -58,7 +68,7 @@ class SubcategoryController extends Controller
         if ($request->has('gambar')) {
             $gambar = $request->file('gambar');
             $nama_gambar = time() . rand(1, 9) . '.' . $gambar->getClientOriginalExtension();
-            $gambar->move('uploads', $nama_gambar);
+            $gambar->move('uploads_images', $nama_gambar);
             $input['gambar'] = $nama_gambar;
         }
 
@@ -66,6 +76,7 @@ class SubcategoryController extends Controller
         // $subcategory = Subcategory::create($request->all());
 
         return response()->json([
+            'success' => true,
             'data' => $subcategory
         ]);
     }
@@ -111,11 +122,11 @@ class SubcategoryController extends Controller
 
         if ($request->has('gambar')) {
 
-            File::delete('uploads/' . $Subcategory->gambar);
+            File::delete('uploads_images/' . $Subcategory->gambar);
 
             $gambar = $request->file('gambar');
             $nama_gambar = time() . rand(1, 9) . '.' . $gambar->getClientOriginalExtension();
-            $gambar->move('uploads', $nama_gambar);
+            $gambar->move('uploads_images', $nama_gambar);
             $input['gambar'] = $nama_gambar;
         } else {
             unset($input['gambar']);
@@ -124,6 +135,7 @@ class SubcategoryController extends Controller
         $Subcategory->update($input);
         // $Subcategory->update($request->all());
         return response()->json([
+            'success' => true,
             'message' => 'success',
             'data' => $Subcategory
         ]);
@@ -134,10 +146,11 @@ class SubcategoryController extends Controller
      */
     public function destroy(Subcategory $subcategory)
     {
-        File::delete('uploads/' . $subcategory->gambar);
+        File::delete('uploads_images' . $subcategory->gambar);
 
         $subcategory->delete();
         return response()->json([
+            'success' => true,
             'message' => 'success'
         ]);
     }
