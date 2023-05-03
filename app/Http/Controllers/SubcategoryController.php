@@ -68,7 +68,7 @@ class SubcategoryController extends Controller
         if ($request->has('gambar')) {
             $gambar = $request->file('gambar');
             $nama_gambar = time() . rand(1, 9) . '.' . $gambar->getClientOriginalExtension();
-            $gambar->move('uploads_images', $nama_gambar);
+            $gambar->move('uploads', $nama_gambar);
             $input['gambar'] = $nama_gambar;
         }
 
@@ -122,11 +122,11 @@ class SubcategoryController extends Controller
 
         if ($request->has('gambar')) {
 
-            File::delete('uploads_images/' . $Subcategory->gambar);
+            File::delete('uploads/' . $Subcategory->gambar);
 
             $gambar = $request->file('gambar');
             $nama_gambar = time() . rand(1, 9) . '.' . $gambar->getClientOriginalExtension();
-            $gambar->move('uploads_images', $nama_gambar);
+            $gambar->move('uploads', $nama_gambar);
             $input['gambar'] = $nama_gambar;
         } else {
             unset($input['gambar']);
@@ -146,7 +146,7 @@ class SubcategoryController extends Controller
      */
     public function destroy(Subcategory $subcategory)
     {
-        File::delete('uploads_images' . $subcategory->gambar);
+        File::delete('uploads' . $subcategory->gambar);
 
         $subcategory->delete();
         return response()->json([

@@ -64,7 +64,7 @@ class ProductController extends Controller
         if ($request->has('gambar')) {
             $gambar = $request->file('gambar');
             $nama_gambar = time() . rand(1,9) . '.' . $gambar->getClientOriginalExtension();
-            $gambar->move('upload_images', $nama_gambar);
+            $gambar->move('uploads', $nama_gambar);
             $input['gambar'] = $nama_gambar;
         }
 
@@ -124,10 +124,10 @@ class ProductController extends Controller
 
         if ($request->has('gambar')) {
             
-            File::delete('upload_images' . $product->gambar);
+            File::delete('uploads' . $product->gambar);
             $gambar = $request->file('gambar');
             $nama_gambar = time() . rand(1, 9) . '.' . $gambar->getClientOriginalExtension();
-            $gambar->move('upload_images', $nama_gambar);
+            $gambar->move('uploads', $nama_gambar);
             $input['gambar'] = $nama_gambar;
         } else {
             unset($input['gambar']);
@@ -146,7 +146,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        File::delete('upload_images' . $product->gambar);
+        File::delete('uploads' . $product->gambar);
 
         $product->delete();
         return response()->json([

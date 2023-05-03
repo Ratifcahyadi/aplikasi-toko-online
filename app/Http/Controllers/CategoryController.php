@@ -64,7 +64,7 @@ class CategoryController extends Controller
         if ($request->has('gambar')) {
             $gambar = $request->file('gambar');
             $nama_gambar = time() . rand(1, 9) . '.' . $gambar->getClientOriginalExtension();
-            $gambar->move('upload_images', $nama_gambar);
+            $gambar->move('uploads', $nama_gambar);
             $input['gambar'] = $nama_gambar;
         }
 
@@ -117,11 +117,11 @@ class CategoryController extends Controller
 
         if ($request->has('gambar')) {
 
-            File::delete('upload_images' . $category->gambar);
+            File::delete('uploads' . $category->gambar);
 
             $gambar = $request->file('gambar');
             $nama_gambar = time() . rand(1, 9) . '.' . $gambar->getClientOriginalExtension();
-            $gambar->move('upload_images', $nama_gambar);
+            $gambar->move('uploads', $nama_gambar);
             $input['gambar'] = $nama_gambar;
         } else {
             unset($input['gambar']);
@@ -141,7 +141,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        File::delete('upload_images' . $category->gambar);
+        File::delete('uploads' . $category->gambar);
 
         $category->delete();
         return response()->json([
