@@ -61,6 +61,7 @@ Route::group([
     Route::get('pesanan/diterima', [OrderController::class, 'diterima']);
     Route::get('pesanan/selesai', [OrderController::class, 'selesai']);
     Route::post('pesanan/ubah_status/{order}', [OrderController::class, 'ubah_status']);
+    
+    Route::get('reports', [ReportController::class, 'get_reports']);
 
-    Route::get('reports', [ReportController::class, 'index']);
 });
