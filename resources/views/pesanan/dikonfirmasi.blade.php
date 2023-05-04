@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Data Pesanan Baru')
+@section('title', 'Data Pesanan Dikonfirmasi')
 
 @section('content')
     
@@ -36,11 +36,10 @@
     $(function(){
 
         function rupiah(angka) {
-        const format = angka.toString().split('').reverse().join('');
-        const convert = format.match(/\d{1,3}/g);
-        return 'Rp ' + convert.join('.').split('').reverse().join('');
+            const format = angka.toString().split('').reverse().join('');
+            const convert = format.match(/\d{1,3}/g);
+            return rupiah = 'Rp ' + convert.join('.').split('').reverse().join('');
         }
-
 
         function date(tanggal) {
             const tgl = new Date(tanggal);
@@ -54,7 +53,7 @@
 
         const token = localStorage.getItem('token'); 
         $.ajax({
-            url: '/api/pesanan/baru',
+            url: '/api/pesanan/dikonfirmasi',
             headers: {"Authorization": 'Bearer ' + token},
             success: function({data}) {
                 let row;
@@ -67,7 +66,7 @@
                         <td>${val.member.nama_member}</td>
                         <td>${rupiah(val.grand_total)}</td>
                         <td>
-                            <a class="btn btn-success rounded-pill btn-aksi" href="#" data-id="${val.id}">Konfirmasi</a>
+                            <a class="btn btn-warning rounded-pill btn-aksi" href="#" data-id="${val.id}">Kemas</a>
                         </td>
                     </tr>
                     `;
@@ -83,7 +82,7 @@
                 url: '/api/pesanan/ubah_status/' + id,
                 type: 'POST',
                 data: {
-                    status: "Dikonfirmasi"
+                    status: "Dikemas"
                 },
                 headers: {
                     "Authorization": 'Bearer ' + token

@@ -174,6 +174,29 @@
             100% { background-position: 0 0; }
         }
 
+        .bg-purple-50 {
+            background: #604bff79;
+        }
+
+        @media only screen and (min-width: 767px) and (max-width: 832px) {
+            .text-mobile {
+                font-size: 16px;
+            }
+
+            .text-mobile-icon {
+                font-size: 24px;
+            }
+        }
+
+        @media only screen and (min-width: 0px) and (max-width: 767px) {
+            .text-mobile {
+                display: none;
+            }
+
+            .text-mobile-icon {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body id="page-top">
@@ -183,9 +206,9 @@
         <!-- Sidebar - Brand -->
         <a class="no-underline sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
             <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-dumpster fa-2x text-purple-10"></i>
+                <i class="text-mobile-icon fa-2x fas fa-dumpster text-md text-purple-10"></i>
             </div>
-            <h1 class="text-bg font-weight-bold fa-2x">D3-Ecommerce</h1>
+            <h1 class="text-mobile text-bg font-weight-bold fa-2x">D3-Ecommerce</h1>
         </a>
         
         <!-- Sidebar Toggle (Topbar) -->
@@ -198,7 +221,7 @@
             <form
                 class="d-none d-sm-inline-block form-inline ml-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                 <div class="input-group">
-                    <input type="text" class="placeholder-white form-control border-0 small" style="background: #604bff79" placeholder="Search for..."
+                    <input type="text" class="placeholder-white form-control border-0 small bg-purple-50" placeholder="Search for..."
                         aria-label="Search" aria-describedby="basic-addon2">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="button">
@@ -222,7 +245,7 @@
                         aria-labelledby="searchDropdown">
                         <form class="form-inline mr-auto w-100 navbar-search">
                             <div class="input-group">
-                                <input type="text" class="form-control bg-light border-0 small"
+                                <input type="text" class="form-control bg-purple-50 border-0 small "
                                     placeholder="Search for..." aria-label="Search"
                                     aria-describedby="basic-addon2">
                                 <div class="input-group-append">

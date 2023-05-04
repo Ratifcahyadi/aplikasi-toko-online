@@ -11,14 +11,52 @@ class OrderController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->except(['index']);
+        $this->middleware('auth')->only([
+            'list', 'dikonformasi_list', 'dikemas_list', 'dikirim_list', 'diterima_list', 'selesai_list'
+        ]);
+
+        $this->middleware('auth:api')->only([
+            'store', 'update', 'destroy', 
+            'ubah_status', 'dikonformasi', 'dikemas', 'dikirim', 'diterima', 'selesai' 
+        ]);
     }
+
+    public function list()
+    {
+        return view('pesanan.index');
+    }
+
+    public function dikonfirmasi_list()
+    {
+        return view('pesanan.dikonfirmasi');
+    }
+
+    public function dikemas_list()
+    {
+        return view('pesanan.dikemas');
+    }
+
+    public function dikirim_list()
+    {
+        return view('pesanan.dikirim');
+    }
+
+    public function diterima_list()
+    {
+        return view('pesanan.diterima');
+    }
+
+    public function selesai_list()
+    {
+        return view('pesanan.selesai');
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $orders = Order::all();
+        $orders = Order::with('member')->get();
         return response()->json([
             'data' => $orders
         ]);
@@ -123,6 +161,7 @@ class OrderController extends Controller
 
     public function ubah_status(Request $request, Order $order)
     {
+        // dd($order);
         $order->update([
             'status' => $request->status
         ]);
@@ -135,7 +174,7 @@ class OrderController extends Controller
 
     public function baru()
     {
-        $orders = Order::where('status', 'Baru')->get();
+        $orders = Order::with('member')->where('status', 'Baru')->get();
 
         return response()->json([
             'data' => $orders
@@ -144,7 +183,16 @@ class OrderController extends Controller
 
     public function dikonfirmasi()
     {
-        $orders = Order::where('status', 'Dikonfirmasi')->get();
+        $orders = Order::with('member')->where('status', 'Dikonfirmasi')->get();
+
+        return response()->json([
+            'data' => $orders
+        ]);
+    }
+
+    public function dikemas()
+    {
+        $orders = Order::with('member')->where('status', 'Dikemas')->get();
 
         return response()->json([
             'data' => $orders
@@ -153,7 +201,7 @@ class OrderController extends Controller
 
     public function dikirim()
     {
-        $orders = Order::where('status', 'Dikirim')->get();
+        $orders = Order::with('member')->where('status', 'Dikirim')->get();
 
         return response()->json([
             'data' => $orders
@@ -162,7 +210,7 @@ class OrderController extends Controller
 
     public function diterima()
     {
-        $orders = Order::where('status', 'Diterima')->get();
+        $orders = Order::with('member')->where('status', 'Diterima')->get();
 
         return response()->json([
             'data' => $orders
@@ -171,7 +219,7 @@ class OrderController extends Controller
 
     public function selesai()
     {
-        $orders = Order::where('status', 'Selesai')->get();
+        $orders = Order::with('member')->where('status', 'Selesai')->get();
 
         return response()->json([
             'data' => $orders

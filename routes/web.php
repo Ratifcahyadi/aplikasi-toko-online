@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SliderController;
@@ -43,3 +44,11 @@ Route::get('/slider', [SliderController::class, 'list']);
 Route::get('/barang', [ProductController::class, 'list']);
 Route::get('/testimoni', [TestimoniController::class, 'list']);
 Route::get('/review', [ReviewController::class, 'list']);
+
+// pesanaan
+Route::get('/pesanan/baru', [OrderController::class, 'list']);
+Route::get('/pesanan/dikonfirmasi', [OrderController::class, 'dikonfirmasi_list']);
+Route::get('/pesanan/dikemas', [OrderController::class, 'dikemas_list']);
+Route::get('/pesanan/dikirim', [OrderController::class, 'dikirim_list']);
+Route::get('/pesanan/diterima', [OrderController::class, 'diterima_list']);
+Route::get('/pesanan/selesai', [OrderController::class, 'selesai_list']);
