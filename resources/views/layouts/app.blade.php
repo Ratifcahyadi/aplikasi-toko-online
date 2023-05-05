@@ -342,6 +342,11 @@
                     <i class="fas fa-fw fa-book"></i>
                     <span>Laporan Pesanan</span></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/payment">
+                    <i class="fas fa-fw fa-dollar-sign"></i>
+                    <span>Pembayaran</span></a>
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
             <li class="nav-item">

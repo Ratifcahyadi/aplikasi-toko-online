@@ -61,7 +61,7 @@
                                 </div>
                             </div>
                             <div class="form-group mb-0">
-                                <button type="submit" class="btn btn-warning btn-block">Submit</button>
+                                <button type="submit" class="btn btn-warning btn-block btn-lg">Submit</button>
                             </div>
                         </form>
                     </div>

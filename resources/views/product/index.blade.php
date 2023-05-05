@@ -114,7 +114,7 @@
                                 <input type="text" name="warna" id="warna" placeholder="Masukkan warna produk..." class="form-control" required>
                             </div>
                             <div class="form-group mb-0">
-                                <button type="submit" class="btn btn-warning btn-block">Submit</button>
+                                <button type="submit" class="btn btn-warning btn-block btn-lg">Submit</button>
                             </div>
                         </form>
                     </div>

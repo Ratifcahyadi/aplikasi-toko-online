@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Data Subkategori')
+@section('title', 'Data Pembayaran')
 
 @section('content')
     
@@ -9,21 +9,17 @@
             <h4 class="card-title">Produk Digital</h4>
         </div> --}}
         <div class="card-body">
-            <div class="d-flex justify-content-end mb-4">
-
-                <a href="#modal-form" class="modal-tambah" data-toggle="modal">
-                    <button class="glow-on-hover" type="button"><i class="fa fa-plus mr-3"></i>Tambah Data</button>
-                </a>
-            </div>
             <div class="table-responsive">
                 <table class="table table-bordered table-hover table-striped">
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Nama Kategori</th>
-                            <th>Nama Subkategori</th>
-                            <th>Deskripsi</th>
-                            <th>Gambar</th>
+                            <th>Tanggal</th>
+                            <th>Order</th>
+                            <th>Jumlah</th>
+                            <th>No. Rekening</th>
+                            <th>Atas Nama</th>
+                            <th>Status</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -37,7 +33,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content bg-purple-900">
             <div class="modal-header bg-gradient-linear">
-                <h5 class="modal-title text-white font-weight-bold bold ">Form Subkategori</h5>
+                <h5 class="modal-title text-white font-weight-bold bold ">Form Pembayaran</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -46,28 +42,33 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <form class="form-kategori text-warning">
+                            {{-- <div class="form-group">
+                                <label for="">Nama Pembayaran</label>
+                                <input type="text" name="nama_pembayaran" id="nama_pembayaran" placeholder="Masukkan nama pemabayaran produk..." class="form-control">
+                            </div> --}}
                             <div class="form-group">
-                                <label for="">Kategori</label>
-                                <select name="id_kategori" id="id_kategori" class="form-control">
-                                    @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->nama_kategori }}</option>
-                                    @endforeach
+                                <label for="">Tanggal</label>
+                                <input type="text" name="tanggal" id="tanggal" placeholder="Masukkan tanggal pemabayaran produk..." class="form-control" readonly required>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Jumlah</label>
+                                <input type="text" name="jumlah" id="jumlah" placeholder="Masukkan jumlah pemabayaran produk..." class="form-control" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="">No. Rekening</label>
+                                <input type="text" name="no_rekening" id="no_rekening" placeholder="Masukkan no. rekening pemabayaran produk..." class="form-control" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Atas Nama</label>
+                                <input type="text" name="atas_nama" id="atas_nama" placeholder="Masukkan atas_nama pemabayaran produk..." class="form-control" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label class="text-danger" for="">Status</label>
+                                <select name="status" id="status" class="form-control">
+                                    <option value="DITERIMA">DITERIMA</option>
+                                    <option value="DITOLAK">DITOLAK</option>
+                                    <option value="MENUNGGU">MENUNGGU</option>
                                 </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="">Nama Subkategori</label>
-                                <input type="text" name="nama_subkategori" id="nama_subkategori" placeholder="Masukkan nama kategori produk..." class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="">Deskripsi</label>
-                                <textarea class="form-control" required name="deskripsi" placeholder="Masukkan deskripsi produk..." id="deskripsi"></textarea>
-                            </div>
-                            <label for="">Gambar</label>
-                            <div class="form-group">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="gambar" name="gambar">
-                                    <label class="custom-file-label" for="gambar">Masukkan foto produk...</label>
-                                </div>
                             </div>
                             <div class="form-group mb-0">
                                 <button type="submit" class="btn btn-warning btn-block btn-lg">Submit</button>
@@ -99,22 +100,31 @@
     });
 
     $(function(){
+        function rupiah(angka) {
+            const format = angka.toString().split('').reverse().join('');
+            const convert = format.match(/\d{1,3}/g);
+            return rupiah = 'Rp ' + convert.join('.').split('').reverse().join('');
+        }
 
+        
         $.ajax({
-            url: '/api/subcategories',
+            url: '/api/payments',
             success: function({data}) {
                 let row;
                 data.map(function(val, index){
+                    tgl = new Date(val.created_at);
+                    tgl_lengkap = `${tgl.getDate()}-${tgl.getMonth()}-${tgl.getFullYear()}`;
                     row += `
                     <tr>
                         <td>${parseInt(index)+1}</td>
-                        <td>${val.category.nama_kategori}</td>
-                        <td>${val.nama_subkategori}</td>
-                        <td>${val.deskripsi}</td>
-                        <td><img src="/uploads/${val.gambar}" width="300" class="rounded"</td>
+                        <td>${tgl_lengkap}</td>
+                        <td>${val.id_order}</td>
+                        <td>${rupiah(val.jumlah)}</td>
+                        <td>${val.no_rekening}</td>
+                        <td>${val.atas_nama}</td>
+                        <td>${val.status}</td>
                         <td>
                             <a data-toggle="modal" class="btn btn-warning modal-ubah"  href="#modal-form" data-id="${val.id}">Edit</a>
-                            <a class="btn btn-outline-danger btn-hapus" href="#" data-id="${val.id}">Hapus</a>
                         </td>
                     </tr>
                     `;
@@ -130,7 +140,7 @@
 
                 if (confirm_dialog) {
                     $.ajax({
-                        url: 'api/subcategories/' + id,
+                        url: 'api/payments/' + id,
                         type: "DELETE",
                         headers: {
                             "Authorization": "Bearer " + token
@@ -145,49 +155,61 @@
                 }
         });
 
-        $('.modal-tambah').click(function(){
-            $('modal-form').modal('show');
+        // $('.modal-tambah').click(function(){
+        //     $('modal-form').modal('show');
 
-            $('select[name="id_kategori"]').val('');
-            $('input[name="nama_subkategori"]').val('');
-            $('textarea[name="deskripsi"]').val('');
+        //     $('input[name="nama_kategori"]').val('');
+        //     $('textarea[name="deskripsi"]').val('');
 
-            $('.form-kategori').submit(function(e){
-                e.preventDefault();
+        //     $('.form-kategori').submit(function(e){
+        //         e.preventDefault();
 
-                const token = localStorage.getItem('token');
-                const frmdata = new FormData(this);
+        //         const token = localStorage.getItem('token');
+        //         const frmdata = new FormData(this);
     
-                $.ajax({
-                    url: 'api/subcategories',
-                    type: 'POST',
-                    data: frmdata,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        "Authorization":'Bearer ' + token
-                    },
-                    success: function(data) {
-                        // console.log(data)
-                        // return
-                        if (data.success) {
-                            alert('Data Berhasil Ditambahkan!');
-                            location.reload();
-                        }
-                    }
-                });
-            });
-        });
+        //         $.ajax({
+        //             url: 'api/payments',
+        //             type: 'POST',
+        //             data: frmdata,
+        //             cache: false,
+        //             contentType: false,
+        //             processData: false,
+        //             headers: {
+        //                 "Authorization": 'Bearer ' + token
+        //             },
+        //             success: function(data) {
+        //                 // console.log(data)
+        //                 // return
+        //                 if (data.success) {
+        //                     alert('Data Berhasil Ditambahkan!');
+        //                     location.reload();
+        //                 }
+        //             }
+        //         });
+        //     });
+        // });
 
         $(document).on('click', '.modal-ubah', function(){
             $('modal-form').modal('show');
 
             const id = $(this).data('id');
 
-            $.get('/api/subcategories/' + id, function({data}){
-                $('input[name="nama_subkategori"]').val(data.nama_subkategori);
-                $('textarea[name="deskripsi"]').val(data.deskripsi);
+            function date(tanggal) {
+                const tgl = new Date(tanggal);
+                const hari = tgl.getDate();
+                const bulan = tgl.getMonth();
+                const tahun = tgl.getFullYear();
+
+                return `${hari}-${bulan}-${tahun}`;
+
+            }
+
+            $.get('/api/payments/' + id, function({data}){
+                $('input[name="tanggal"]').val(date(data.created_at));
+                $('input[name="jumlah"]').val(data.jumlah);
+                $('input[name="no_rekening"]').val(data.no_rekening);
+                $('input[name="atas_nama"]').val(data.atas_nama);
+                $('select[name="status"]').val(data.status);
             });
 
             $('.form-kategori').submit(function(e){
@@ -197,7 +219,7 @@
                 const frmdata = new FormData(this);
 
                 $.ajax({
-                    url: `api/subcategories/${id}?_method=PUT`,
+                    url: `api/payments/${id}?_method=PUT`,
                     type: 'POST',
                     data: frmdata,
                     cache: false,
