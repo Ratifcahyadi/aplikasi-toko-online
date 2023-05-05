@@ -88,16 +88,6 @@
 @push('js')
 
 <script>
-    $('#gambar').on('change', function(){
-    console.log("upload gambar jalan gess!");
-    files = $(this)[0].files; 
-    name = ''; 
-    for(var i = 0; i < files.length; i++)
-    {
-        name += '\"' + files[i].name + '\"' + (i != files.length-1 ? ", " : ""); 
-    } 
-    $(".custom-file-label").html(name);
-    });
 
     $(function(){
         function rupiah(angka) {
@@ -124,7 +114,7 @@
                         <td>${val.atas_nama}</td>
                         <td>${val.status}</td>
                         <td>
-                            <a data-toggle="modal" class="btn btn-warning modal-ubah"  href="#modal-form" data-id="${val.id}">Edit</a>
+                            <a data-toggle="modal" class="btn btn-info rounded-pill w-100 modal-ubah"  href="#modal-form" data-id="${val.id}">Ubah Status</a>
                         </td>
                     </tr>
                     `;
@@ -133,61 +123,6 @@
             }
         });
         
-        $(document).on('click', '.btn-hapus', function(){
-                confirm_dialog = confirm('Yakin Hapus Data?');
-                const id = $(this).data('id');
-                const token = localStorage.getItem('token');
-
-                if (confirm_dialog) {
-                    $.ajax({
-                        url: 'api/payments/' + id,
-                        type: "DELETE",
-                        headers: {
-                            "Authorization": "Bearer " + token
-                        },
-                        success: function(data) {
-                            if (data.message == 'success') {
-                                alert('Data Berhasil Dihapus!');
-                                location.reload();
-                            }
-                        }
-                    })
-                }
-        });
-
-        // $('.modal-tambah').click(function(){
-        //     $('modal-form').modal('show');
-
-        //     $('input[name="nama_kategori"]').val('');
-        //     $('textarea[name="deskripsi"]').val('');
-
-        //     $('.form-kategori').submit(function(e){
-        //         e.preventDefault();
-
-        //         const token = localStorage.getItem('token');
-        //         const frmdata = new FormData(this);
-    
-        //         $.ajax({
-        //             url: 'api/payments',
-        //             type: 'POST',
-        //             data: frmdata,
-        //             cache: false,
-        //             contentType: false,
-        //             processData: false,
-        //             headers: {
-        //                 "Authorization": 'Bearer ' + token
-        //             },
-        //             success: function(data) {
-        //                 // console.log(data)
-        //                 // return
-        //                 if (data.success) {
-        //                     alert('Data Berhasil Ditambahkan!');
-        //                     location.reload();
-        //                 }
-        //             }
-        //         });
-        //     });
-        // });
 
         $(document).on('click', '.modal-ubah', function(){
             $('modal-form').modal('show');
