@@ -95,7 +95,12 @@ class AuthController extends Controller
         ]);
     }
 
-    public function login_member(Request $request)
+    public function login_member()
+    {
+        return view('auth.login_member');
+    }
+
+    public function login_member_action(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
@@ -103,53 +108,64 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(
-                $validator->errors(),
-                422
-            );
+            // dd($validator->errors()->toArray());
+            Session::flash('errors', $validator->errors()->toArray());
+            return view('auth.login_member');
         }
-
-
-        // $credentials = $request->only('email', 'password');
-        // $member = Member::where('email', $request->email)->first();
-        // dd($member);
-        // die();
-
-        // if ($member) {
-        //     dd('member ditemukan');
-            // $member = Member::where('email', $request->email)->first();
-            // $request->session()->regenerate();
-        //     return response()->json([
-        //         'message' => 'success',
-        //         'data' => $member
-        //     ]);
-        // } else {
-        //     return response()->json([
-        //         'message' => 'failed',
-        //         'data' => 'Email atau Password salah'
-        //     ]);
-        // }
 
         $member = Member::where('email', $request->email)->first();
         if ($member) {
             if (Hash::check($request->password, $member->password)) {
                 $request->session()->regenerate();
-                return response()->json([
-                    'message' => 'success',
-                    'data' => $member
-                ]);
+                echo "Login Berhasil";
             } else {
-                return response()->json([
-                    'message' => 'failed',
-                    'data' => 'password is wrong'
-                ]);
+                Session::flash('failed', 'Password salah!');
+                return redirect('/login_member');
             }
         } else {
-            return response()->json([
-                'message' => 'failed',
-                'data' => 'Email is wrong'
-            ]);
+            Session::flash('failed', 'Email tidak ditemukan!');
+            return redirect('/login_member');
         }
+    }
+
+    public function register_member()
+    {
+        return view('auth.register_member');
+    }
+
+    public function register_member_action(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'nama_member' => 'required',
+            'provinsi' => 'required',
+            'kabupaten' => 'required',	
+            'kecamatan' => 'required',	
+            'detail_alamat' => 'required',	
+            'no_hp' => 'required',	
+            'email' => 'required|email',	
+            'password' => 'required|same:konfirmasi_password',
+            'konfirmasi_password' => 'required|same:password'
+        ]);
+
+        if ($validator->fails()) {
+            // dd($validator->errors()->toArray());
+            Session::flash('errors', $validator->errors()->toArray());
+            return view('auth.register_member');
+            // return response()->json(
+            //     $validator->errors(),
+            //     422
+            // );
+        }
+
+        $input = $request->all();
+        $input['password'] = bcrypt($request->password);
+        unset($input['konfirmasi_password']);
+        Member::create($input);
+
+        // $member = mem$member::create($request->all());
+        Session::flash('success', 'Akun Berhasil Dibuat!');
+        return view('auth.login_member');
     }
 
     public function logout()

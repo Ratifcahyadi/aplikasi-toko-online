@@ -8,9 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>Login</title>
+    <title>Login Member</title>
 
     <!-- Custom fonts for this template-->
     <link href="/sb-admin-2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -50,52 +48,53 @@
                                 <div class="p-5">
                                     <div class="text-center">
                                         <i class="fas fa-dumpster fa-7x" style="color: rgb(153,0,255);"></i>
-                                        <h1 class="h2 font-weight-bold text-white mb-4">LOGIN E-COMMERCE</h1>
+                                        <h1 class="h2 font-weight-bold text-white mb-4">LOGIN MEMBER E-COMMERCE</h1>
                                     </div>
+                                    @if (Session::has('errors'))
+                                    <ul class="alert text-white bg-secondary">
+                                        @foreach (Session::get('errors') as $error)
+                                            <li>{{ $error[0] }}</li>
+                                        @endforeach
+                                    </ul>
+                                @endif
 
-                                    @if ($errors->any())
-                                        <div class="alert text-warning bg-danger">
-                                            <strong>Gagal Login</strong>
-                                            <p>{{ $errors->first() }}</p>
-                                        </div>
+                                    @if (Session::has('success'))
+                                        <p class="alert text-primary bg-secondary">{{ Session::get('success') }}</p>
                                     @endif
 
-                                    <form class="form-login user" method="POST" action="/login">
+                                    @if (Session::has('failed'))
+                                        <p class="alert text-white bg-danger">{{ Session::get('failed') }}</p>
+                                    @endif
+
+                                    <form class="form-login user" method="POST" action="/login_member">
                                         @csrf
                                         <div class="form-group">
-                                            <label class="text-white" for="email">Email</label>
-                                            <input name="email" type="email" class="form-control form-control-user rounded-lg border-bottom-warning email"
+                                            <label class="text-warning" for="email">Email</label>
+                                            <input required name="email" type="email" class="form-control form-control-user rounded-lg border-bottom-primary"
                                             id="exampleInputEmail" aria-describedby="emailHelp"
                                             placeholder="Masukkan Email...">
-                                            <small class="text-danger">
-                                                @error('email')
-                                                    {{ $message }}
-                                                @enderror
-                                            </small>
                                         </div>
                                         <div class="form-group">
-                                            <label class="text-white" for="email">Password</label>
-                                            <input name="password" type="password" class="form-control form-control-user rounded-lg border-bottom-warning password"
+                                            <label class="text-warning" for="email">Password</label>
+                                            <input required name="password" type="password" class="form-control form-control-user rounded-lg border-bottom-primary"
                                                 id="exampleInputPassword" placeholder="Masukkan Password...">
-                                                <small class="text-danger">
-                                                    @error('password')
-                                                        {{ $message }}
-                                                    @enderror
-                                                </small>
                                         </div>
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">
                                                 <label class="custom-control-label" for="customCheck">Remember
                                                     Me</label>
                                             </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-warning btn-lg btn-block rounded-lg">
+                                        </div> --}}
+                                        <button type="submit" class="btn btn-warning btn-lg btn-block rounded-lg mb-3">
                                             Masuk
                                         </button>
-                                        {{-- <hr> --}}
+                                        <span>Belum punya akun? 
+                                            <a href="/register_member" class="text-warning h3:hover">Buat Akun</a>
+                                        </span>
 
                                     </form>
+
                             </div>
                         </div>
                     </div>
@@ -116,51 +115,6 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/sb-admin-2/js/sb-admin-2.min.js"></script>
-
-    <script>
-        $(function(){
-        // fungsi untuk membuat cookie
-            function setCookie(name, value, days) {
-                var expires = "";
-                if (days) {
-                    var date = new Date();
-                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                    expires = "; expires=" + date.toUTCString();
-                }
-                document.cookie = name + "=" + (value || "")  + expires + "; path=/";
-            }
-
-
-        $('.form-login').submit(function(e){
-        e.preventDefault();
-        
-        const email = $('.email').val();
-        const password = $('.password').val();
-        const csrf_token = $('meta[name="csrf-token"]').attr('content');
-
-        // console.log(csrf_token)
-
-                $.ajax({
-                    url: '/login',
-                    type: 'POST',
-                    data: {
-                        email: email,
-                        password: password,
-                        _token: csrf_token
-                    },
-                    success: function(data) {
-                        if (!data.success) {
-                            alert(data.message)
-                        }
-
-                        // setCookie('token', data.token, 7)
-                        localStorage.setItem('token', data.token)
-                        window.location.href = '/dashboard';
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 
 </html>
