@@ -27,7 +27,7 @@
         }
 
         .custom-control-label {
-            accent-color : #f6c23e; !important
+            accent-color : #f6c23e !important; 
         }
 
     </style>
