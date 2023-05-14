@@ -18,193 +18,20 @@
 
     <title>@yield('title')</title>
 
+    <link rel="stylesheet" type="text/css" href="/sb-admin-2/scss/sb-admin-2.css" />
     <!-- Custom fonts for this template-->
     <link href="/sb-admin-2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Poppins:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <!-- Custom styles for this template-->
-    <link href="/sb-admin-2/css/sb-admin-2.min.css" rel="stylesheet">
-
-    <style>
-        html, body, {
-            font-family: 'Poppins' sans-serif; !important
-        }
-
-        .bg-gradient-primaries {
-            background: #a100f6;
-            background: -moz-linear-gradient(180deg, #a100f6 0%, #02d2ff%) 100%);
-            background: -webkit-linear-gradient(180deg, rgba(161,0,246,1) 0%, rgba(2,210,255,1) 100%);
-            background: linear-gradient(180deg, rgba(161,0,246,1) 0%, rgba(2,210,255,1) 100%);
-            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#a100f6",endColorstr="#02d2ff",GradientType=1);
-        }
-
-        .bg-gradient-linear {
-            background: #a100f6;
-            background: -moz-linear-gradient(45deg, #a100f6 0%, #02d2ff%) 100%);
-            background: -webkit-linear-gradient(45deg, rgba(161,0,246,1) 0%, rgba(2,210,255,1) 100%);
-            background: linear-gradient(45deg, rgba(161,0,246,1) 0%, rgba(2,210,255,1) 100%);
-            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#a100f6",endColorstr="#02d2ff",GradientType=1);
-        }
-
-        .text-bg {
-            background: #a100f6;
-            background: -moz-linear-gradient(45deg, #a100f6 0%, #02d2ff%) 100%);
-            background: -webkit-linear-gradient(45deg, rgba(161,0,246,1) 0%, rgba(2,210,255,1) 100%);
-            background: linear-gradient(45deg, rgba(161,0,246,1) 0%, rgba(2,210,255,1) 100%);
-            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#a100f6",endColorstr="#02d2ff",GradientType=1);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .text-bg:hover {
-            background: url('https://picsum.photos/seed/picsum/40');
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .bg-purple-900 {
-            background: #200046;
-        }
-        
-        /* 
-        .text-bg {
-            background: -webkit-linear-gradient(45deg, #a100f6 0%, #02d2ff 80%);
-            -webkit-background-clip: text;
-            -webkit-textfield-color: transparent;
-        } */
-        
-        .no-underline:hover {
-            text-decoration: none; !important
-        }
-
-        .placeholder-white::placeholder, .input-group input[type=text] {
-            color: white; 
-            caret-color: yellow;
-        }
-
-        .bg-glass {
-            background: rgba( 255, 255, 255, 0.25 );
-            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-            backdrop-filter: blur( 4px );
-            -webkit-backdrop-filter: blur( 4px );
-            /* border-radius: 10px; */
-            border: 1px solid rgba( 255, 255, 255, 0.18 );
-        }
-
-        .text-purple-10 {
-            color: #9900ff
-        }
-
-        .shadow-smooth {
-            box-shadow:
-            4.5px 4.5px 3.6px rgba(0, 0, 0, 0.01),
-            12.5px 12.5px 10px rgba(0, 0, 0, 0.022),
-            30.1px 30.1px 24.1px rgba(0, 0, 0, 0.039),
-            100px 100px 80px rgba(0, 0, 0, 0.07)
-            ;
-        }
-
-        .glow-on-hover {
-            width: 220px;
-            height: 50px;
-            border: none;
-            outline: none;
-            color: #fff;
-            background: #111;
-            cursor: pointer;
-            position: relative;
-            z-index: 0;
-            border-radius: 30px;
-            box-shadow:
-            4.5px 4.5px 3.6px rgba(0, 0, 0, 0.01),
-            12.5px 12.5px 10px rgba(0, 0, 0, 0.022),
-            30.1px 30.1px 24.1px rgba(0, 0, 0, 0.039),
-            100px 100px 80px rgba(0, 0, 0, 0.07)
-            ;
-        }
-
-        .glow-on-hover:before {
-            content: '';
-            background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-            position: absolute;
-            top: -2px;
-            left:-2px;
-            background-size: 400%;
-            z-index: -1;
-            filter: blur(5px);
-            width: calc(100% + 4px);
-            height: calc(100% + 4px);
-            animation: glowing 20s linear infinite;
-            opacity: 0;
-            transition: opacity .3s ease-in-out;
-            border-radius: 30px;
-        }
-
-        .glow-on-hover:active {
-            color: #000
-        }
-
-        .glow-on-hover:active:after {
-            background: transparent;
-        }
-
-        .glow-on-hover:hover:before {
-            opacity: 1;
-        }
-
-        .glow-on-hover:after {
-            z-index: -1;
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: #47006d;
-            left: 0;
-            top: 0;
-            border-radius: 30px;
-        }
-
-        @keyframes glowing {
-            0% { background-position: 0 0; }
-            50% { background-position: 400% 0; }
-            100% { background-position: 0 0; }
-        }
-
-        .bg-purple-50 {
-            background: #604bff79;
-        }
-
-        @media only screen and (min-width: 767px) and (max-width: 832px) {
-            .text-mobile {
-                font-size: 16px;
-            }
-
-            .text-mobile-icon {
-                font-size: 24px;
-            }
-        }
-
-        @media only screen and (min-width: 0px) and (max-width: 767px) {
-            .text-mobile {
-                display: none;
-            }
-
-            .text-mobile-icon {
-                display: none;
-            }
-        }
-    </style>
 </head>
 <body id="page-top">
     <!-- Topbar -->
     <nav class="navbar navbar-expand navbar-light bg-light shadow-smooth topbar sticky-top shadow" >
 
         <!-- Sidebar - Brand -->
-        <a class="no-underline sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <a class="no-underline sidebar-brand d-flex align-items-center justify-content-center" href="/">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="text-mobile-icon fa-2x fas fa-dumpster text-md text-purple-10"></i>
             </div>
@@ -346,6 +173,11 @@
                 <a class="nav-link" href="/payment">
                     <i class="fas fa-fw fa-dollar-sign"></i>
                     <span>Pembayaran</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tentang">
+                    <i class="fas fa-fw fa-globe"></i>
+                    <span>Tentang</span></a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider">

@@ -11,6 +11,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SubcategoryController;
+use App\Http\Controllers\TentangController;
 use App\Http\Controllers\TestimoniController;
 use Illuminate\Support\Facades\Route;
 
@@ -66,6 +67,8 @@ Route::get('/pesanan/selesai', [OrderController::class, 'selesai_list']);
 
 Route::get('laporan', [ReportController::class, 'index']);
 Route::get('reports', [ReportController::class, 'get_reports']);
+Route::get('/tentang', [TentangController::class, 'index']);
+Route::post('/tentang/{about}', [TentangController::class, 'update']);
 
 // home routes
 Route::get('/', [HomeController::class, 'index']);
