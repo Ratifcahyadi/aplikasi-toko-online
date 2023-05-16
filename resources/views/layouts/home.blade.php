@@ -3,7 +3,10 @@
     <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {{-- <meta name="viewport" content="width=device-width, initial-scale=1"> --}}
+            <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+            <!-- Link Swiper's CSS -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
         <title>@yield('title')</title>
         <link rel="stylesheet" type="text/css" href="/sb-admin-2/scss/sb-admin-2.css" />
         <!-- Custom fonts for this template-->
@@ -64,7 +67,7 @@
                 <li class="nav-item">
                     <a class="nav-link text-dark" aria-current="page" href="/">Home</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item dropdown">
                     <a class="nav-link text-dark" href="/products">Shop</a>
                 </li>
                 <li class="nav-item">
@@ -258,7 +261,9 @@
         </div>
     </footer>
     <!-- Footer -->
-
+        @stack('swiper')
+        <!-- Swiper JS -->
+        <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
         <!-- Bootstrap core JavaScript-->
         <script src="/sb-admin-2/vendor/jquery/jquery.min.js"></script>
         <script src="/sb-admin-2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

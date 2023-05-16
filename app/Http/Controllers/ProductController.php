@@ -62,7 +62,7 @@ class ProductController extends Controller
             'diskon' => 'required',
             'bahan' => 'required',
             'tags' => 'required',
-            'tags' => 'required',
+            'ukuran' => 'required',
             'sku' => 'required',
             'warna' => 'required',
             'gambar' => 'required|image|mimes:jpg,png,jpeg,webp',

@@ -15,7 +15,34 @@ color: #3b71ca !important;
 }
 </style>
 </header>
-
+<section class="py-5">
+    <div class="container">
+        <div class="row gx-5">
+            {{-- <i class="fa fa-angle-right drop-down-trigger"></i> --}}
+            @php
+                $categories = App\Models\Category::all();
+            @endphp
+                    @foreach ($categories as $category)
+                        <div class="col-md-3 megamenu-item">
+                            <div class="menu-list">
+                                <li>
+                                    <span>{{ $category->nama_kategori }}</span>
+                                </li>
+                                @php
+                                $subcategories = App\Models\Subcategory::where('id_kategori', $category->id)->get();
+                                @endphp
+                                @foreach ($subcategories as $subcategory)
+                                            <li>
+                                                <a href="/products/{{ $subcategory->id }}">{{ $subcategory->nama_subkategori }}</a>
+                                            </li>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endforeach
+                    
+        </div>
+    </div>
+</section>
 <!-- content -->
 <section class="py-5">
 <div class="container">

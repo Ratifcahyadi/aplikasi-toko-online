@@ -3,6 +3,55 @@
 @section('title', 'Home | D3-Ecommerce')
 
 @section('content')
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+<!-- Link Swiper's CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <!-- Swiper -->
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            @foreach ($sliders as $slider)
+            <div class="swiper-slide">    
+                <h1 class="text-primary mb-2 text-left">{{ $slider->nama_slider }}</h1>
+                <h2 class="text-info mb-2 text-left">{{ $slider->deskripsi }}</h2>
+                <img  src="/uploads/{{ $slider->gambar }}" class="w-100 slider">
+            </div>
+            @endforeach
+        {{-- <div class="swiper-slide">Slide 2</div>
+        <div class="swiper-slide">Slide 3</div>
+        <div class="swiper-slide">Slide 4</div>
+        <div class="swiper-slide">Slide 5</div>
+        <div class="swiper-slide">Slide 6</div>
+        <div class="swiper-slide">Slide 7</div>
+        <div class="swiper-slide">Slide 8</div>
+        <div class="swiper-slide">Slide 9</div> --}}
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
+</div>
+    
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    
+    <!-- Initialize Swiper -->
+    <script>
+    var swiper = new Swiper(".mySwiper", {
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+        },
+        pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+        },
+        navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+        },
+    });
+    </script>
 <!-- Jumbotron -->
 <div class="bg-gradient-linear text-white py-5">
     <div class="container py-5">
@@ -22,6 +71,26 @@
     </div>
 </div>
 <!-- Jumbotron -->
+
+<section class="sectio-warp promo-banners pb-3 mt-2" style="background: #fff !important">
+    <div class="container" >
+        <div class="row">
+            @foreach ($categories as $category)
+                <div class="col-lg-3 mb-3 promo-banner">
+                    <a href="/front/#">
+                        <div class="card">
+                                <img src="/uploads/{{ $category->gambar }}" alt="gamabar kategori" class="w-100 rounded-top">
+                            <div class="card-body rounded-bottom">
+                                <h2>{{ $category->nama_kategori }}</h2>
+                                <span>{{ $category->deskripsi }}</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
 
 <!-- Products -->
 <div class="container my-5">
@@ -306,3 +375,23 @@
     </section>
     <!-- Blog -->
 @endsection
+@push('swiper')
+<script>
+        var swiper = new Swiper(".mySwiper", {
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+        },
+        pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+        },
+        navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+        },
+        });
+</script>
+@endpush
