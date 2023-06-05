@@ -127,7 +127,7 @@ class ProductController extends Controller
             'tags' => 'required',
             'sku' => 'required',
             'warna' => 'required',
-            'gambar' => 'required|image|mimes:jpg,png,jpeg,webp',
+            'gambar' => 'image|mimes:jpg,png,jpeg,webp',
             'deskripsi' => 'required',
         ]);
 

@@ -16,14 +16,6 @@
                 <img  src="/uploads/{{ $slider->gambar }}" class="w-100 slider">
             </div>
             @endforeach
-        {{-- <div class="swiper-slide">Slide 2</div>
-        <div class="swiper-slide">Slide 3</div>
-        <div class="swiper-slide">Slide 4</div>
-        <div class="swiper-slide">Slide 5</div>
-        <div class="swiper-slide">Slide 6</div>
-        <div class="swiper-slide">Slide 7</div>
-        <div class="swiper-slide">Slide 8</div>
-        <div class="swiper-slide">Slide 9</div> --}}
     </div>
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
@@ -94,6 +86,15 @@
 
 <!-- Products -->
 <div class="container my-5">
+    @php
+        $subcategories = 
+        App\Models\Subcategory::where('id_kategori', $category->id)->get();
+    @endphp
+    @foreach ($subcategories as $subcategory)
+        <li>
+            <a href="/products/1">{{ $subcategory->nama_subcategori }}</a>
+        </li>
+    @endforeach
     <header class="mb-4">
         <h3>New products</h3>
         </header>

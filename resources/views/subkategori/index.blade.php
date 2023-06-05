@@ -101,6 +101,9 @@
     $(function(){
 
         $.ajax({
+            // <td>${val.category.nama_kategori}</td>
+            
+            
             url: '/api/subcategories',
             success: function({data}) {
                 let row;
