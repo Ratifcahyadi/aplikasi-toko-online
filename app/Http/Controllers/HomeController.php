@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Product;
 use App\Models\Slider;
+use App\Models\Subcategory;
+use App\Models\Testimoni;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -12,7 +15,9 @@ class HomeController extends Controller
     {
         $sliders = Slider::all();
         $categories = Category::all();
-        return view('home.index', compact('sliders', 'categories'));
+        $testimonies = Testimoni::all();
+        $products = Product::all();
+        return view('home.index', compact('sliders', 'categories', 'testimonies', 'products'));
     }
     
     public function products()
