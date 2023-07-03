@@ -3,19 +3,19 @@
 @section('title', 'Data Kategori')
 
 @section('content')
-    
+
+
     <div class="card shadow">
         {{-- <div class="card-header">
             <h4 class="card-title">Produk Digital</h4>
         </div> --}}
-        <div class="card-body">
+        <div class="card-body w-100">
             <div class="d-flex justify-content-end mb-4">
-
                 <a href="#modal-form" class="modal-tambah" data-toggle="modal">
                     <button class="glow-on-hover" type="button"><i class="fa fa-plus mr-3"></i>Tambah Data</button>
                 </a>
             </div>
-            <div class="table-responsive">
+            <div class="table-responsiev">
                 <table class="table table-bordered table-hover table-striped">
                     <thead>
                         <tr>
@@ -31,6 +31,7 @@
             </div>
         </div>
     </div>
+
 
     <div class="modal fade bg-glass" id="modal-form" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">

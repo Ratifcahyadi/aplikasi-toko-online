@@ -53,7 +53,7 @@
 
         const token = localStorage.getItem('token'); 
         $.ajax({
-            url: '/api/pesanan/dikirim',
+            url: '/api/pesanan/diterima',
             headers: {"Authorization": 'Bearer ' + token},
             success: function({data}) {
                 let row;
@@ -66,7 +66,7 @@
                         <td>${val.member.nama_member}</td>
                         <td>${rupiah(val.grand_total)}</td>
                         <td>
-                            <a class="btn btn-outline-success rounded-pill btn-aksi" href="#" data-id="${val.id}">Diterima</a>
+                            <a class="btn btn-outline-success rounded-pill btn-aksi" href="#" data-id="${val.id}">Selesai</a>
                         </td>
                     </tr>
                     `;
@@ -82,13 +82,13 @@
                 url: '/api/pesanan/ubah_status/' + id,
                 type: 'POST',
                 data: {
-                    status: "Diterima"
+                    status: "Selesai"
                 },
                 headers: {
                     "Authorization": 'Bearer ' + token
                 },
                 success: function(data) {
-                    loaction.reload();
+                    location.reload();
                 }
             });
         })

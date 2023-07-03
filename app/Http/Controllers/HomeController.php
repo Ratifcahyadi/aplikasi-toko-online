@@ -16,7 +16,7 @@ class HomeController extends Controller
         $sliders = Slider::all();
         $categories = Category::all();
         $testimonies = Testimoni::all();
-        $products = Product::all();
+        $products = Product::skip(0)->take(10)->get();
         return view('home.index', compact('sliders', 'categories', 'testimonies', 'products'));
     }
     

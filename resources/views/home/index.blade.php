@@ -11,11 +11,11 @@
         <div class="swiper-wrapper">
             @foreach ($sliders as $slider)
             <div class="swiper-slide">   
-                <div class="glass-box bg-dark p-2">
-                    <h1 class="text-primary mb-2 text-left">{{ $slider->nama_slider }}</h1>
-                    <h2 class="text-info mb-2 text-center ">{{ $slider->deskripsi }}</h2>
+                <div class="glass-box p-4">
+                    <h1 class="text-white mb-2 text-left font-weight-bold">{{ $slider->nama_slider }}</h1>
+                    <h2 class="text-info mb-2 text-center font-weight-normal">{{ $slider->deskripsi }}</h2>
                 </div> 
-                <img  src="/uploads/{{ $slider->gambar }}" class="w-100 slider">
+                <img  src="/uploads/{{ $slider->gambar }}" class="w-100 slider" style="aspect-ratio: 16 / 4; background-fit: cover;">
             </div>
             @endforeach
     </div>
@@ -46,6 +46,28 @@
         },
     });
     </script>
+
+<section class="sectio-warp promo-banners pb-3 m-4" style="background: #fff !important">
+    <div class="container my-2 p-2" >
+        <h4 class="text-primary text-center my-4">Kategori Produk</h4>
+        <div class="row">
+            @foreach ($categories as $category)
+                <div class="col-lg-3 mb-3 promo-banner">
+                    <a href="/front/#">
+                        <div class="card">
+                                <img src="/uploads/{{ $category->gambar }}" alt="gamabar kategori" class="w-100 rounded-top" style="aspect-ratio:16/9">
+                            <div class="card-boxes rounded-bottom">
+                                <h2 class="text-warning w-card p-2">{{ $category->nama_kategori }}</h2>
+                                <span class="p-2">{{ $category->deskripsi }}  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
 <!-- Jumbotron -->
 <div class="bg-gradient-linear text-white py-5">
     <div class="container py-5">
@@ -66,38 +88,7 @@
 </div>
 <!-- Jumbotron -->
 
-<section class="sectio-warp promo-banners pb-3 mt-2" style="background: #fff !important">
-    <div class="container" >
-        <div class="row">
-            @foreach ($categories as $category)
-                <div class="col-lg-3 mb-3 promo-banner">
-                    <a href="/front/#">
-                        <div class="card">
-                                <img src="/uploads/{{ $category->gambar }}" alt="gamabar kategori" class="w-100 rounded-top">
-                            <div class="card-body rounded-bottom">
-                                <h2>{{ $category->nama_kategori }}</h2>
-                                <span>{{ $category->deskripsi }}</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            @endforeach
-        </div>
-    </div>
-</section>
 
-@php
-    $subcategories = 
-    App\Models\Subcategory::where('id_kategori', $category->id)->get();
-@endphp
-<div class="container my-2 bg-info p-2">
-    <h4 class="text-white">Sub Kategori Produk</h4>
-    @foreach ($subcategories as $subcategory)
-    <li>
-        <a class="text-warning" href="/products/1">{{ $subcategory->nama_subkategori }}</a>
-    </li>
-    @endforeach
-</div>
 
 <!-- Products -->
 <div class="container my-5">
@@ -110,9 +101,9 @@
                 <div class="card w-100 my-2 shadow-2-strong">
                 <img src="/uploads/{{ $product->gambar }}" class="card-img-top" style="aspect-ratio: 16 / 9" />
                 <div class="card-body d-flex flex-column ">
-                    <h5 class="card-title">{{ $product->nama_barang }}</h5>
+                    <h5 class="card-title w-card">{{ $product->nama_barang }}</h5>
                     <p class="card-text">Rp {{ number_format($product->harga, 0, ',', '.') }}</p>
-                    <div class="card-footer justify-content-between d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
+                    <div class="card-footer justify-content-between d-flex align-items-end pt-2 px-0 pb-0 mt-auto">
                     <a href="#!" class="btn bg-gradient-linear text-white border-0 shadow-0 me-1">Add to cart</a>
                     <a href="#!" class="btn btn-warning bg-opacity-favorit border-none px-2 pt-2 icon-hover"><i class="fas fa-heart fa-lg text-white px-1"></i></a>
                     </div>
@@ -400,10 +391,10 @@
     {{-- Tetimoni --}}
     <section class="mt-5 mb-4">
         <h4 class="text-primary text-center">Testimoni</h4>
-        <div class="container bg-warning p-5">
+        <div class="bg-warning p-5">
             @foreach ($testimonies as $testimony)
-            <div class="container">
-                <p class="mb-2 text-white">{{ $testimony->deskripsi }}</p>
+            <div class="text-left mr-3">
+                <p class="mb-2 text-white font-italic">"{{ $testimony->deskripsi }}"</p>
                 <span>{{ $testimony->nama_testimoni }}</span>
             </div>
             @endforeach

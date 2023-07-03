@@ -3,6 +3,7 @@
 
 // Import Bootstrap
 @import "../vendor/bootstrap/scss/bootstrap.scss";
+
 // Import Custom SB Admin 2 Mixins and Components
 @import "mixins.scss";
 @import "global.scss";
@@ -29,7 +30,26 @@ html, body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    // z-index: 1;
+    background-color: rgba(81, 81, 81, 0.399);
+    backdrop-filter: blur(30px);
+    border-radius: 10px;
+}
+
+.w-card {
+    max-width: 200px !important;
+    max-height: 64px !important;
+    overflow: hidden;
+    white-space: nowrap; /* Mencegah pemisahan kata */
+    text-overflow: ellipsis; /* Menggantikan teks berlebihan dengan titik-titik */
+}
+
+.card-boxes {
+    padding: 12px !important;
+    max-width: 350px !important;
+    min-height: 120px !important;
+    overflow: hidden;
+    white-space: nowrap; /* Mencegah pemisahan kata */
+    text-overflow: ellipsis; /* Menggantikan teks berlebihan dengan titik-titik */
 }
 
 .bg-opacity-favorit {

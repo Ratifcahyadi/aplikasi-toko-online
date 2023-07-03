@@ -53,7 +53,7 @@
 
         const token = localStorage.getItem('token'); 
         $.ajax({
-            url: '/api/pesanan/diterima',
+            url: '/api/pesanan/selesai',
             headers: {"Authorization": 'Bearer ' + token},
             success: function({data}) {
                 let row;

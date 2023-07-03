@@ -35,9 +35,9 @@
             {{-- <div class="order-lg-last"> --}}
             <div class="row">
             <div class="d-flex float-end">
-                <a href="/login_member" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center mr-2" target="_blank"> <i class="fas fa-user-alt m-1 me-md-2"></i><p class="d-none d-md-block mb-0">Login</p> </a>
-                <a href="/checkout" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center mr-2" target="_blank"> <i class="fas fa-heart m-1 me-md-2"></i><p class="d-none d-md-block mb-0">Wishlist</p> </a>
-                <a href="/cart" class="border rounded py-1 px-3 nav-link d-flex align-items-center" target="_blank"> <i class="fas fa-shopping-cart m-1 me-md-2"></i><p class="d-none d-md-block mb-0">My cart</p> </a>
+                <a href="/login_member" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center mr-2" target="_blank"> <i class="text-dark fas fa-user-alt m-1 me-md-2"></i><p class="d-none d-md-block mb-0">Login</p> </a>
+                <a href="/checkout" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center mr-2" target="_blank"> <i class="text-danger fas fa-heart m-1 me-md-2"></i><p class="d-none d-md-block mb-0">Wishlist</p> </a>
+                <a href="/cart" class="border rounded py-1 px-3 nav-link d-flex align-items-center" target="_blank"> <i class="text-warning fas fa-shopping-cart m-1 me-md-2"></i><p class="d-none d-md-block mb-0">My cart</p> </a>
                 {{-- <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="border rounded py-1 px-3 nav-link d-flex align-items-center" target="_blank"> <i class="fas fa-shopping-cart m-1 me-md-2"></i><p class="d-none d-md-block mb-0">My cart</p> </a> --}}
             </div>
             </div>

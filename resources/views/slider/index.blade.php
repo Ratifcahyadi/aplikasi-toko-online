@@ -8,7 +8,7 @@
         {{-- <div class="card-header">
             <h4 class="card-title">Produk Digital</h4>
         </div> --}}
-        <div class="card-body">
+        <div class="card">
             <div class="d-flex justify-content-end mb-4">
 
                 <a href="#modal-form" class="modal-tambah" data-toggle="modal">
