@@ -5,7 +5,7 @@
 @section('content')
             <!--Section: Content-->
             <section class="mb-5">
-                <h4 class="mb-5 text-center"><strong>Facilis consequatur eligendi</strong></h4>
+                <h4 class="mb-5 text-center"><strong>Hubungi Kami</strong></h4>
         
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-6">
@@ -69,7 +69,30 @@
             <footer class="bg-light text-lg-start">
         
             <hr class="m-0" />
-        
+    <div class="container">
+        <div class="mt-2 d-flex justify-content-center">
+            <div class="contact-item">
+                <h6 class="h4">Alamat</h6>
+                <address>{{ $about->judul_website }}<br>
+                {{ $about->alamat }}</address>
+            </div>
+
+            <div class="contact-item">
+                <h6 class="h4">Informasi</h6>
+                <ul>
+                    <li>
+                        <i class="fa fa-envelope"><a href="mailto:{{ $about->email }}"> {{ $about->email }}</a></i>
+                    </li>
+                    <li>
+                        <i class="fa fa-phone"><span> {{ $about->telepon }}</span></i>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
             <div class="text-center py-4 align-items-center">
                 <p>Follow D3 E-Commerce on social media</p>
                 <a

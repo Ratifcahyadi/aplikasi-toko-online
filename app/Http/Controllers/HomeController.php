@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\About;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Slider;
@@ -48,12 +49,15 @@ class HomeController extends Controller
     
     public function about()
     {
-        return view('home.about');
+        $about = About::first();
+        $testimonies = Testimoni::all();
+        return view('home.about', compact('about', 'testimonies'));
     }
     
     public function contact()
     {
-        return view('home.contact');
+        $about = About::first();
+        return view('home.contact', compact('about'));
     }
     
     public function faq()

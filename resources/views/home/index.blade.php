@@ -55,7 +55,7 @@
                 <div class="col-lg-3 mb-3 promo-banner">
                     <a href="/front/#">
                         <div class="card">
-                                <img src="/uploads/{{ $category->gambar }}" alt="gamabar kategori" class="w-100 rounded-top" style="aspect-ratio:16/9">
+                                <img src="/uploads/{{ $category->gambar }}" alt="gambar kategori" class="w-100 rounded-top" style="aspect-ratio:16/9">
                             <div class="card-boxes rounded-bottom">
                                 <h2 class="text-warning w-card p-2">{{ $category->nama_kategori }}</h2>
                                 <span class="p-2">{{ $category->deskripsi }}  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
@@ -67,6 +67,21 @@
         </div>
     </div>
 </section>
+
+<a href="/front/shop-single.html">
+    {{-- <img src="/uploads/{{ $products->gambar }}" alt=""> --}}
+</a>
+<span class="category">
+    {{-- <a href="/products/{{ $products->id_subkategori }}">{{ $product->subcategory->nama_subcategori }}</a> --}}
+</span>
+<h3 class="product-title">
+    {{-- <a href="/products/{{ $products->id }}">{{ $product->nama_barang }}</a> --}}
+</h3>
+<span class="price">
+    <ins>
+        {{-- <span class="amount">{{ number_format($product->harga) }}</span> --}}
+    </ins>
+</span>
 
 <!-- Jumbotron -->
 <div class="bg-gradient-linear text-white py-5">
@@ -103,6 +118,11 @@
                 <div class="card-body d-flex flex-column ">
                     <h5 class="card-title w-card">{{ $product->nama_barang }}</h5>
                     <p class="card-text">Rp {{ number_format($product->harga, 0, ',', '.') }}</p>
+                    <div class="btn-quickview">
+                        <a href="/products/{{ $product->id }}" class="btn- btn-md btn-color">
+                            <span>More</span>
+                        </a>
+                    </div>
                     <div class="card-footer justify-content-between d-flex align-items-end pt-2 px-0 pb-0 mt-auto">
                     <a href="#!" class="btn bg-gradient-linear text-white border-0 shadow-0 me-1">Add to cart</a>
                     <a href="#!" class="btn btn-warning bg-opacity-favorit border-none px-2 pt-2 icon-hover"><i class="fas fa-heart fa-lg text-white px-1"></i></a>
