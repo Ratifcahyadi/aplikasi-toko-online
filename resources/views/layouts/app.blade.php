@@ -24,9 +24,10 @@
     <title>@yield('title')</title>
 
 </head>
+
 <body id="page-top">
     <!-- Topbar -->
-    <nav class="navbar navbar-expand navbar-light bg-light shadow-smooth topbar sticky-top shadow" >
+    <nav class="navbar navbar-expand navbar-light bg-light shadow-smooth topbar sticky-top shadow">
 
         <!-- Sidebar - Brand -->
         <a class="no-underline sidebar-brand d-flex align-items-center justify-content-center" href="/">
@@ -35,7 +36,7 @@
             </div>
             <h1 class="text-mobile text-bg font-weight-bold fa-2x">D3-Ecommerce</h1>
         </a>
-        
+
         <!-- Sidebar Toggle (Topbar) -->
         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
@@ -43,11 +44,10 @@
 
         <div class="ml-auto d-flex align-items-center">
             <!-- Topbar Search -->
-            <form
-                class="d-none d-sm-inline-block form-inline ml-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <form class="d-none d-sm-inline-block form-inline ml-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                 <div class="input-group">
-                    <input type="text" class="placeholder-white form-control border-0 small bg-purple-50" placeholder="Search for..."
-                        aria-label="Search" aria-describedby="basic-addon2">
+                    <input type="text" class="placeholder-white form-control border-0 small bg-purple-50"
+                        placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="button">
                             <i class="fas fa-search fa-sm"></i>
@@ -55,10 +55,10 @@
                     </div>
                 </div>
             </form>
-    
+
             <!-- Topbar Navbar -->
             <ul class="navbar-nav ms-auto">
-    
+
                 <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                 <li class="nav-item dropdown no-arrow d-sm-none">
                     <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
@@ -71,8 +71,7 @@
                         <form class="form-inline mr-auto w-100 navbar-search">
                             <div class="input-group">
                                 <input type="text" class="form-control bg-purple-50 border-0 small "
-                                    placeholder="Search for..." aria-label="Search"
-                                    aria-describedby="basic-addon2">
+                                    placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="button">
                                         <i class="fas fa-search fa-sm"></i>
@@ -82,23 +81,21 @@
                         </form>
                     </div>
                 </li>
-    
+
                 <div class="topbar-divider d-none d-sm-block"></div>
-    
+
                 <!-- Nav Item - User Information -->
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                        <img class="img-profile rounded-circle"
-                            src="/sb-admin-2/img/undraw_profile.svg">
+                        <img class="img-profile rounded-circle" src="/sb-admin-2/img/undraw_profile.svg">
                     </a>
                     <!-- Dropdown - User Information -->
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Logout
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" <a class="dropdown-item"
+                        href="#" data-toggle="modal" data-target="#logoutModal">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Logout
                         </a>
                     </div>
                 </li>
@@ -150,7 +147,8 @@
                     <i class="fas fa-fw fa-shopping-cart"></i>
                     <span>Data Pesanan</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
                     <div class="bg-glass py-2 collapse-inner rounded">
                         <a class="collapse-item text-warning" href="/pesanan/baru">Pesanan Baru</a>
                         <a class="collapse-item text-warning" href="/pesanan/dikonfirmasi">Pesanan Dikonfirmasi</a>
@@ -216,13 +214,13 @@
             <!-- Footer -->
             <footer class="sticky-footer bg-white mt-2">
                 <div class="container my-auto">
-                    <div class="copyright text-center my-auto"> 
+                    <div class="copyright text-center my-auto">
                         <p>
-                        Copyright &copy;
-                        <i class="fas fa-dumpster fa-1x text-purple-10 rotate-n-15"></i>
-                        <span class="text-bg">D3-Ecommerce </span>  
-                        <span id="year"></span>
-                        </p>  
+                            Copyright &copy;
+                            <i class="fas fa-dumpster fa-1x text-purple-10 rotate-n-15"></i>
+                            <span class="text-bg">D3-Ecommerce </span>
+                            <span id="year"></span>
+                        </p>
                     </div>
                 </div>
             </footer>
