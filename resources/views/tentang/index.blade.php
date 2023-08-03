@@ -32,7 +32,7 @@
                     </div>
                     <div class="form-group">
                         <label for="">Alamat</label>
-                        <textarea class="form-control" required name="alamat" placeholder="Masukkan alamat website..." id="deskripsi">{{ $about->alamat }}</textarea>
+                        <textarea class="form-control" required name="alamat" placeholder="Masukkan alamat website..." id="alamat">{{ $about->alamat }}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="">Email</label>
@@ -41,6 +41,14 @@
                     <div class="form-group">
                         <label for="">Telepon</label>
                         <input type="text" name="telepon" id="telepon" placeholder="Masukkan telepon website produk..." class="form-control" required value="{{ $about->telepon }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Atas Nama</label>
+                        <input type="text" name="atas_nama" id="atas_nama" placeholder="Masukkan nama..." class="form-control" required value="{{ $about->atas_nama }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Nomor Rekening</label>
+                        <input type="text" name="no_rekening" id="no_rekening" placeholder="Masukkan nomor rekening..." class="form-control" required value="{{ $about->no_rekening }}">
                     </div>
                     <div class="form-group mb-0">
                         <button type="submit" class="btn btn-warning btn-block btn-lg">Submit</button>

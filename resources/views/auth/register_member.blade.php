@@ -34,7 +34,9 @@
 
         body {
             background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/003.webp');
-            /* background-repeat: no-repeat; */
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
             width: 100%;
             height: 100%;
         }
@@ -47,18 +49,18 @@
         <!-- Outer Row -->
         <div class="row justify-content-center d-flex align-items-center min-vh-100">
 
-            <div class="col-xl-12 col-lg-12 col-md-12">
+            <div class="w-50">
 
-                <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card o-hidden border-0 shadow-lg">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="bg-warning-login">
                             {{-- <div class="col-lg-6 d-none d-lg-block bg-register-images" style="background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/003.webp');"></div> --}}
                             
-                            <div class="p-5">
+                            <div class="p-4">
                                 <div class="text-center">
-                                    <i class="fas fa-dumpster fa-7x" style="color: rgb(255, 115, 0);"></i>
-                                    <h1 class="h2 font-weight-bold text-warning mb-4">Register E-COMMERCE</h1>
+                                    <i class="fas fa-dumpster fa-3x" style="color: rgb(255, 115, 0);"></i>
+                                    <h1 class="h4 font-weight-bold text-warning mb-2">Register E-COMMERCE</h1>
                                 </div>
                                 @if (Session::has('errors'))
                                     <ul class="alert text-white bg-secondary">
@@ -68,9 +70,9 @@
                                     </ul>
                                 @endif
 
-                                <form class="form-login user row" method="POST" action="/register_member">
+                                <form class="form-login user" method="POST" action="/register_member">
                                     @csrf
-                                    <div class="col-sm-6 col-md-6 col-xl-6 col-lg-6">
+                                    <div class=" w-100">
                                         <div class="form-group">
                                             <label class="text-danger" for="email">Nama Member</label>
                                             <input required id="nama_member" name="nama_member" type="text" class="form-control form-control-user rounded-lg border-left-warning nama_member"
@@ -97,7 +99,10 @@
                                             placeholder="Masukkan No. Handphone...">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 col-md-6 col-xl-6 col-lg-6">
+                                    <button type="submit" class="btn btn-danger btn-lg btn-block rounded-pill w-100 mb-3">
+                                        Register
+                                    </button>
+                                    {{-- <div class="col-sm-6 col-md-6 col-xl-6 col-lg-6">
                                         <div class="form-group">
                                             <label class="text-info" for="provinsi">Provinsi</label>
                                             <input required id="provinsi" name="provinsi" type="text" class="form-control form-control-user rounded-lg border-left-info provinsi"
@@ -118,14 +123,13 @@
                                             <textarea required id="detail_alamat" name="detail_alamat" type="text" class="form-control form-control-user rounded-lg border-left-info detail_alamat"
                                             placeholder="Masukkan Detail Alamat..."></textarea>
                                         </div>
-                                    </div>
-                                        <button type="submit" class="btn btn-danger btn-lg btn-block rounded mb-3">
-                                            Register
-                                        </button>
-                                        <span>Sudah punya akun? 
-                                            <a href="/login_member" class="text-warning text-warning">Login</a>
-                                        </span>
+                                    </div> --}}
                                 </form>
+                                    <div class="text-center ">
+                                        <p>Sudah punya akun? 
+                                            <a href="/login_member" class="text-warning text-warning">Login</a>
+                                        </p>
+                                    </div>
                             </div>
                         </div>
                     </div>

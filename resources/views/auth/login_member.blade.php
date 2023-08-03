@@ -51,7 +51,7 @@
                                         <h1 class="h2 font-weight-bold text-white mb-4">LOGIN MEMBER E-COMMERCE</h1>
                                     </div>
                                     @if (Session::has('errors'))
-                                    <ul class="alert text-white bg-secondary">
+                                    <ul class="alert text-white bg-success">
                                         @foreach (Session::get('errors') as $error)
                                             <li>{{ $error[0] }}</li>
                                         @endforeach

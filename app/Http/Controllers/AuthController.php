@@ -68,10 +68,6 @@ class AuthController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_member' => 'required',
-            'provinsi' => 'required',
-            'kabupaten' => 'required',	
-            'kecamatan' => 'required',	
-            'detail_alamat' => 'required',	
             'no_hp' => 'required',	
             'email' => 'required|email',	
             'password' => 'required|same:konfirmasi_password',
@@ -112,12 +108,15 @@ class AuthController extends Controller
             Session::flash('errors', $validator->errors()->toArray());
             return view('auth.login_member');
         }
-
+        $credentials = $request->only('email', 'password');
         $member = Member::where('email', $request->email)->first();
+
         if ($member) {
-            if (Hash::check($request->password, $member->password)) {
+            if (Auth::guard('webmember')->attempt($credentials)) {
+            // if (Hash::check($request->password, $member->password)) {
                 $request->session()->regenerate();
-                echo "Login Berhasil";
+                // echo "Login Berhasil";
+                return redirect('/');
             } else {
                 Session::flash('failed', 'Password salah!');
                 return redirect('/login_member');
@@ -138,10 +137,6 @@ class AuthController extends Controller
 
         $validator = Validator::make($request->all(), [
             'nama_member' => 'required',
-            'provinsi' => 'required',
-            'kabupaten' => 'required',	
-            'kecamatan' => 'required',	
-            'detail_alamat' => 'required',	
             'no_hp' => 'required',	
             'email' => 'required|email',	
             'password' => 'required|same:konfirmasi_password',
@@ -178,7 +173,8 @@ class AuthController extends Controller
 
     public function logout_member()
     {
+        Auth::guard('webmember')->logout();
         Session::flush();
-        return redirect('/login_member');
+        return redirect('/');
     }
 }
