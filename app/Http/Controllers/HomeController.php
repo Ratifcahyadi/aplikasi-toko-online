@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\About;
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Slider;
@@ -24,20 +25,54 @@ class HomeController extends Controller
         return view('home.index', compact('sliders', 'categories', 'testimonies', 'products'));
     }
     
-    public function products()
+    public function products($id)
     {
-        return view('home.products');
+        // Assuming you have a "Product" model, you can fetch the data by ID like this:
+        $product = Product::find($id);
+
+        if (!$product) {
+            // Handle the case when the product is not found, for example:
+            abort(404, 'Product not found');
+        }
+
+        // Pass the product data to the view
+        return view('home.products', ['product' => $product]);
     }
     
-    
-    public function product()
+    // public function products($id_product)
+    // {
+    //     $product = Product::where('id_subkategori', $id_subcategory)->get();
+    //     return view('home.products', compact('products'));
+    // }
+
+    public function product($id_product)
     {
-        return view('home.product');
+        $product = Product::find($id_product)->get();
+        $latest_products = Product::orderByDesc('ceated_at')->offset(0)->limit(10)->get();
+        return view('home.product', compact('product', latest_products));
+    }
+
+    public function add_to_cart(Request $request)
+    {
+        $input =  $request->all();
+        Cart::create($input);
     }
     
     public function cart()
     {
-        return view('home.cart');
+        if (!Auth::guard('webmember')->user()) {
+            return redirect('login_member');
+        }
+
+        $carts = Cart::where('id_member', Auth::guard('webmember')->user()->id)->get();
+        // dd($carts);
+        return view('home.cart', compact('carts'));
+    }
+    
+    public function delete_from_cart(Cart $cart)
+    {
+        $cart->delete();
+        return redirect('/cart');
     }
     
     public function checkout()

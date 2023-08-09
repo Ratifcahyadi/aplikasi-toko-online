@@ -56,22 +56,22 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
   
                 <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                   <!-- Quantity -->
+                  <label class="form-label" for="form1">Quantity</label>
                   <div class="d-flex mb-4" style="max-width: 300px">
-                    <button class="btn btn-primary px-3   mr-4"
+                    <button class="btn btn-primary px-3 mr-1"
                       onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                       <i class="fas fa-minus"></i>
                     </button>
   
                     <div class="form-outline">
                       <input id="form1" min="0" name="quantity" value="1" type="number" class="form-control" />
-                      <label class="form-label" for="form1">Quantity</label>
                     </div>
-  
-                    <button class="btn btn-primary px-3 ml-4 ms-2"
-                      onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                      <i class="fas fa-plus"></i>
-                    </button>
-                  </div>
+                    
+                    <button class="btn btn-primary px-3 ml-1 ms-2"
+                    onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
                   <!-- Quantity -->
   
                   <!-- Price -->
@@ -118,18 +118,18 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
   
                 <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                   <!-- Quantity -->
+                  <label class="form-label" for="form1">Quantity</label>
                   <div class="d-flex mb-4" style="max-width: 300px">
-                    <button class="btn btn-primary px-3  mr-4 me-2"
+                    <button class="btn btn-primary px-3  mr-2 me-2"
                       onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                       <i class="fas fa-minus"></i>
                     </button>
   
                     <div class="form-outline">
                       <input id="form1" min="0" name="quantity" value="1" type="number" class="form-control" />
-                      <label class="form-label" for="form1">Quantity</label>
                     </div>
   
-                    <button class="btn btn-primary px-3  ml-4 ms-2"
+                    <button class="btn btn-primary px-3 ml-2 ms-2"
                       onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                       <i class="fas fa-plus"></i>
                     </button>

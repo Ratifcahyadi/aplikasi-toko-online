@@ -16,4 +16,9 @@ class Member extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
+
+    public function cart()
+    {
+        return $this->hasMany(Cart::class);
+    }
 }

@@ -118,13 +118,13 @@
                 <div class="card-body d-flex flex-column ">
                     <h5 class="card-title w-card">{{ $product->nama_barang }}</h5>
                     <p class="card-text">Rp {{ number_format($product->harga, 0, ',', '.') }}</p>
-                    <div class="btn-quickview">
+                    {{-- <div class="btn-quickview">
                         <a href="/products/{{ $product->id }}" class="btn- btn-md btn-color">
                             <span>More</span>
                         </a>
-                    </div>
+                    </div> --}}
                     <div class="card-footer justify-content-between d-flex align-items-end pt-2 px-0 pb-0 mt-auto">
-                    <a href="#!" class="btn bg-gradient-linear text-white border-0 shadow-0 me-1">Add to cart</a>
+                    <a href="/products/{{ $product->id }}" class="btn bg-gradient-linear text-white border-0 shadow-0 me-1 add-to-cart">Lihat Produk</a>
                     <a href="#!" class="btn btn-warning bg-opacity-favorit border-none px-2 pt-2 icon-hover"><i class="fas fa-heart fa-lg text-white px-1"></i></a>
                     </div>
                 </div>

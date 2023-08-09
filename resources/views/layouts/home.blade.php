@@ -303,6 +303,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/sb-admin-2/js/sb-admin-2.min.js"></script>
+    @stack('js')
 </body>
 
 </html>
