@@ -421,6 +421,7 @@
         </div>
     </section>
 @endsection
+@stack('js')
 @push('swiper')
 <script>
         var swiper = new Swiper(".mySwiper", {
