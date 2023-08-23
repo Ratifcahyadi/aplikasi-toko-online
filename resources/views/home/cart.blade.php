@@ -27,13 +27,20 @@
     <!-- cart + summary -->
     <section class="bg-light my-5">
         <div class="container">
-            <div class="row">
-                <!-- cart -->
+
+            <!-- cart -->
+            <form class="row form-cart">
+                <input type="hidden" name="id_member" value="{{ Auth::guard('webmember')->user()->id }}">
                 <div class="col-lg-9 mt-4 mb-4">
                     <div class="card border shadow-0">
                         <div class="m-4">
                             <h4 class="card-title mb-4">Your shopping cart</h4>
                             @foreach ($carts as $cart)
+                                <input type="hidden" name="id_produk[]" value="{{ $cart->product->id }}">
+                                <input type="hidden" name="jumlah[]" value="{{ $cart->jumlah }}">
+                                <input type="hidden" name="size[]" value="{{ $cart->size }}">
+                                <input type="hidden" name="color[]" value="{{ $cart->color }}">
+                                <input type="hidden" name="total[]" value="{{ $cart->total }}">
                                 <div class="row gy-3 mb-4">
                                     <div class="col-lg-5">
                                         <div class="me-lg-5">
@@ -66,26 +73,27 @@
                                             {{-- <input id="form1" min="0" name="quantity" value="1"
                                                 type="number" class="form-control" /> --}}
                                             <label class="form-label" for="form1">Quantity</label>
-                                            <p class="text-muted ml-3"> {{ $cart->jumlah }}</p>
+                                            <p class="text-muted ml-3"> {{ number_format($cart->jumlah, 0, ',', '.') }}</p>
                                         </div>
                                     </div>
 
                                     <div class="ml-2">
-                                        <p class="text-muted ml-3"> <span class="text-dark h6 font-weight-bold">Total Biaya:
+                                        <p class="text-muted ml-3"> <span class="text-dark h6 font-weight-bold">Total
+                                                Biaya:
                                             </span class="h4"> Rp
                                             {{ number_format($cart->total, 0, ',', '.') }}</p>
+                                            <a href="/delete_from_cart/{{ $cart->id }}"
+                                                class="btn btn-light border text-danger icon-hover-danger rounded-pill">
+                                                Remove</a>
                                         {{-- @harga satuan in here --}}
                                     </div>
-                                    <div
+                                    {{-- <div
                                         class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
                                         <div class="float-md-end">
                                             <a href="#" class="btn btn-light border px-2 icon-hover-primary"><i
                                                     class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
-                                            <a href="/delete_from_cart/{{ $cart->id }}"
-                                                class="btn btn-light border text-danger icon-hover-danger">
-                                                Remove</a>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             @endforeach
                             {{-- 
@@ -166,8 +174,10 @@
                         <div class="border-top pt-4 mx-4 mb-4">
                             <p><i class="fas fa-truck text-muted ml-3 fa-lg"></i> Free Delivery within 1-2 weeks</p>
                             <p class="text-muted ml-3">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                incididunt
+                                ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                                ullamco
                                 laboris nisi ut
                                 aliquip
                             </p>
@@ -199,7 +209,8 @@
                                     <select type="text" class="form-control border font-italic provinsi" id="provinsi"
                                         name="provinsi" placeholder="Provinsi...">
                                         @foreach ($provinsi->rajaongkir->results as $provinsi)
-                                            <option value="{{ $provinsi->province_id }}">{{ $provinsi->province }}</option>
+                                            <option value="{{ $provinsi->province_id }}">{{ $provinsi->province }}
+                                            </option>
                                         @endforeach
                                     </select>
                                     {{-- <button class="btn btn-light border">Apply</button> --}}
@@ -211,61 +222,65 @@
                                     </select>
                                     {{-- <button class="btn btn-light border">Apply</button> --}}
                                 </div>
-                                <label class="form-label">Detail Alamat</label>
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control border text-dark font-italic detail_alamat"
-                                        id="detail_alamat" name="detail_alamat" placeholder="Alamat lengkap..." />
-                                </div>
+                                {{-- <label class="form-label">Detail Alamat</label>
+                                    <div class="input-group mb-3">
+                                        <input type="text"
+                                            class="form-control border text-dark font-italic detail_alamat"
+                                            id="detail_alamat" name="detail_alamat" placeholder="Alamat lengkap..." />
+                                    </div> --}}
                                 <label class="form-label">Berat Barang</label>
                                 <div class="input-group mb-3">
                                     <input type="number" pattern="\d+" min="1"
                                         class="form-control border text-dark font-italic berat" id="berat"
                                         name="berat" placeholder="Berat barang..." />
                                 </div>
-                                <input type="submit" name="calc_shipping" value="Update Totals"
-                                    class="btn btn-info text-white w-100 rounded-pill border update-total">
+                                <a href="#" name="calc_shipping"
+                                    class="btn btn-info text-white w-100 rounded-pill border update-total">Update Totals</a>
                                 {{-- </form> --}}
                             </div>
-                        </div>
-                        <div class="card shadow-0 border">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between">
-                                    <p class="mb-2">Total price:</p>
-                                    <p class="mb-2 cart-total">Rp {{ number_format($cart_total, 0, ',', '.') }}</p>
-                                    {{-- <p class="mb-2">$329.00</p> --}}
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    {{-- <p class="mb-2">Discount:</p> --}}
-                                    <p class="mb-2">Shipping Cost:</p>
-                                    <p class="mb-2 text-success shipping-cost">0</p>
-                                    {{-- <p class="mb-2 text-success">-$60.00</p> --}}
-                                </div>
-                                {{-- <div class="d-flex justify-content-between"> --}}
-                                {{-- <p class="mb-2">TAX:</p> --}}
-                                {{-- <p class="mb-2">0</p> --}}
-                                {{-- <p class="mb-2">$14.00</p> --}}
-                                {{-- </div> --}}
-                                <hr />
-                                <div class="d-flex justify-content-between">
-                                    <p class="mb-2">Order Total:</p>
-                                    {{-- <p class="mb-2">Total price:</p> --}}
-                                    <p class="mb-2 fw-bold grand-total">0</p>
-                                    {{-- <p class="mb-2 fw-bold">$283.00</p> --}}
-                                </div>
+                            <div class="card shadow-0 border">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <p class="mb-2">Total price:</p>
+                                        <p class="mb-2 cart-total">Rp {{ number_format($cart_total, 0, ',', '.') }}</p>
+                                        {{-- <p class="mb-2">$329.00</p> --}}
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        {{-- <p class="mb-2">Discount:</p> --}}
+                                        <p class="mb-2">Shipping Cost:</p>
+                                        <p class="mb-2 text-success shipping-cost">0</p>
+                                        {{-- <p class="mb-2 text-success">-$60.00</p> --}}
+                                    </div>
+                                    {{-- <div class="d-flex justify-content-between"> --}}
+                                    {{-- <p class="mb-2">TAX:</p> --}}
+                                    {{-- <p class="mb-2">0</p> --}}
+                                    {{-- <p class="mb-2">$14.00</p> --}}
+                                    {{-- </div> --}}
+                                    <hr />
+                                    <div class="d-flex justify-content-between">
+                                        <p class="mb-2">Order Total:</p>
+                                        <input type="hidden" name="grand_total" class="grand_total">
+                                        <p class="mb-2 fw-bold grand-total">0</p>
+                                        {{-- <p class="mb-2">Total price:</p> --}}
+                                        {{-- <p class="mb-2 fw-bold">$283.00</p> --}}
+                                    </div>
 
-                                <div class="mt-3">
-                                    <a href="#" class="btn btn-success w-100 shadow-0 mb-2"> Make Purchase </a>
-                                    <a href="#" class="btn btn-light w-100 border mt-2"> Back to shop </a>
+                                    <div class="mt-3">
+                                        <a href="#" class="btn btn-success w-100 shadow-0 mb-2 checkout"> Make
+                                            Purchase </a>
+                                        <a href="/" class="btn btn-light w-100 border mt-2"> Back to shop </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- summary -->
-                </div>
-            </div>
+                        <!-- summary -->
+            </form>
+
+        </div>
     </section>
+
     <!-- cart + summary -->
-    <section>
+    {{-- <section>
         <div class="container my-5">
             <header class="mb-4">
                 <h3>Recommended items</h3>
@@ -358,7 +373,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- Recommended -->
 
 @endsection
@@ -382,26 +397,27 @@
                 });
             });
 
-            $('.update-total').click(function() {
+            $('.update-total').click(function(e) {
+                e.preventDefault();
                 $.ajax({
                     url: '/get_ongkir/' + $('.kota').val() + '/' + $('.berat').val(),
                     success: function(data) {
-                        // data = JSON.parse(data)
-                        // grandTotal = parseInt(data.rajaongkir.results[0].costs[0].cost[0] 
-                        //     .value) + parseInt($('.cart-total').text())
-                        // $('.shipping-cost').text(data.rajaongkir.results[0].costs[0].cost[0]
-                        //     .value)
-                        // $('.grand-total').text(grandTotal)
+                        // data = JSON.parse(data);
+                        // grandTotal = parseInt(data.rajaongkir.results[0].costs[0].cost[0].value) + parseInt($('.cart-total').text());
+                        // $('.shipping-cost').text(data.rajaongkir.results[0].costs[0].cost[0].value);
+                        // $('.grand-total').text(grandTotal);
+                        // $('.grand_total').val(grandTotal);
+
                         // Mengambil data JSON dari respons server
                         data = JSON.parse(data);
                         var shippingCost = parseInt(data.rajaongkir.results[0].costs[0].cost[0]
                             .value);
-                        var cartTotal = parseInt($('.cart-total').text().replace(/\D/g,
-                            ''));
+                        var cartTotal = parseInt($('.cart-total').text().replace(/\D/g, ''));
                         var grandTotal = shippingCost + cartTotal;
 
                         $('.shipping-cost').text(formatRupiah(shippingCost));
                         $('.grand-total').text(formatRupiah(grandTotal));
+                        $('.grand_total').val(grandTotal);
 
                         function formatRupiah(number) {
                             var formatter = new Intl.NumberFormat('id-ID', {
@@ -413,7 +429,22 @@
                             return formatter.format(number);
                         }
 
+                    }
+                });
+            });
 
+            $('.checkout').click(function(e) {
+                e.preventDefault();
+                $.ajax({
+
+                    url: '/checkout_orders',
+                    method: 'POST',
+                    data: $('.form-cart').serialize(),
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}",
+                    },
+                    success: function() {
+                        window.location.href = '/checkout';
                     }
                 });
             });
@@ -427,6 +458,8 @@
             //         key: API_KEY
             //     },
             //     success: function(data) {
+
+
             //         console.log(data);
             //     }
             // })

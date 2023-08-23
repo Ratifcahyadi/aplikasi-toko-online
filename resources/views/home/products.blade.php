@@ -147,7 +147,7 @@
                             <dd class="col-9">
                                 @foreach ($colours as $color)
                                     <div class="mr-2">
-                                        <input type="radio" name="colour" id="{{ $color }}"
+                                        <input type="radio" name="color" id="{{ $color }}"
                                             value="{{ $color }}" class="color">
                                         <label for="{{ $color }}"> {{ $color }} </label>
                                     </div>
@@ -184,14 +184,14 @@
                                     $sizes = explode(',', $product->ukuran);
                                 @endphp
                                 <label class="mb-2">Size</label>
-                                @foreach ($sizes as $size)
-                                    <select value="{{ $size }}" id="{{ $size }}"
-                                        class="size form-select border border-secondary form-control" style="height: 35px;">
-                                        <option> {{ $size }} </option>
-                                        {{-- <option>Medium</option>
-                                <option>Large</option> --}}
-                                    </select>
-                                @endforeach
+                                <select id="sizeDropdown" class="size form-select border border-secondary form-control" style="height: 35px;">
+                                    @foreach ($sizes as $size)
+                                        <option value="{{ $size }}">{{ $size }}</option>
+                                    @endforeach
+                                </select>
+                                
+                                    {{-- <option>Medium</option>
+                            <option>Large</option> --}}
                             </div>
                             <!-- col.// -->
                             <div class="col-md-4 col-6 mb-3">
@@ -204,8 +204,8 @@
                                     </button>
 
                                     <div class="form-outline">
-                                        <input id="form1" min="0" name="jumlah" value="{{$product->jumlah}}" type="number"
-                                            class="jumlah form-control" />
+                                        <input id="form1" min="1" name="jumlah" value="{{ $product->jumlah }}"
+                                            type="number" class="jumlah form-control" />
                                     </div>
 
                                     <button class="btn btn-primary px-3 ml-2 ms-2"
@@ -215,12 +215,12 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-warning shadow-0"> Buy now </a>
-                        <a href="" class="btn btn-primary shadow-0 add-to-cart"> <i
+                        {{-- <a href="#" class="btn btn-warning shadow-0"> Buy now </a> --}}
+                        <a href="" class="btn btn-primary shadow-0 add-to-cart bg-gradient"> <i
                                 class="me-1 fa fa-shopping-basket"></i>
                             Add to cart </a>
-                        <a href="#" class="btn btn-light border border-secondary py-2 icon-hover px-3"> <i
-                                class="me-1 fa fa-heart fa-lg"></i> Save </a>
+                        {{-- <a href="#" class="btn btn-light border border-secondary py-2 icon-hover px-3"> <i
+                                class="me-1 fa fa-heart fa-lg"></i> Save </a> --}}
                     </div>
                 </main>
             </div>
@@ -228,7 +228,7 @@
     </section>
     <!-- content -->
 
-    <section class="bg-light border-top py-4">
+    {{-- <section class="bg-light border-top py-4">
         <div class="container">
             <div class="row gx-4">
                 <div class="col-lg-8 mb-4">
@@ -417,7 +417,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 @endsection
 
 
@@ -425,35 +425,45 @@
     <script>
         $(function() {
             $('.add-to-cart').click(function(e) {
-                // console.log('ok');
-                id_member = {{ Auth::guard('webmember')->user()->id }};
-                id_barang = {{ $product->id }};
-                jumlah = $('.jumlah').val();
-                size = $('.size').val();
-                color = $('.color').val();
-                total = {{ $product->harga }} * jumlah;
-                is_checkout = 0;
-                // console.log('{!! $product !!}');
+                e.preventDefault();
+
+                // Dapatkan nilai-nilai yang diperlukan dari elemen-elemen HTML
+                var id_member = {{ Auth::guard('webmember')->user()->id }};
+                var id_barang = {{ $product->id }};
+                var jumlah = $('.jumlah').val();
+                var size = $('.size').val();
+                var color = $('.color').val();
+                var total = {{ $product->harga }} * jumlah;
+                var is_checkout = 0;
+
+                // Buat objek data yang akan dikirim dalam permintaan Ajax
+                var requestData = {
+                    id_barang: id_barang,
+                    id_member: id_member,
+                    jumlah: jumlah,
+                    size: size,
+                    color: color,
+                    total: total,
+                    is_checkout: is_checkout,
+                    _token: "{{ csrf_token() }}"
+                };
+
+                // Lakukan permintaan Ajax untuk menambahkan ke keranjang
                 $.ajax({
                     url: '/add_to_cart',
-                    headers: {
-                        'X-CSRF-TOKEN': "{{csrf_token()}}"
-                    },
                     method: "POST",
-                    data: {
-                        id_barang,
-                        id_member,
-                        jumlah,
-                        size,
-                        color,
-                        total,
-                        is_checkout
-                    },
+                    data: requestData,
                     success: function(data) {
-                        window.location.href = '/cart'
+                        // Berhasil menambahkan ke keranjang, pindah ke halaman keranjang
+                        window.location.href = '/cart';
+                    },
+                    error: function(xhr, status, error) {
+                        // Tangani kesalahan jika terjadi
+                        console.error(error);
                     }
                 });
+
             });
-        })
+        });
     </script>
 @endpush

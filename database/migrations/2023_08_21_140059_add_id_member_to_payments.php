@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('about', function (Blueprint $table) {
-            $table->string('atas_nama');
-            $table->string('no_rekening');
+        Schema::table('payments', function (Blueprint $table) {
+            $table->integer('id_member');
         });
     }
 
@@ -22,9 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('about', function (Blueprint $table) {
-            $table->dropColumn('atas_nama');
-            $table->dropcolumn('no_rekening');
+        Schema::table('payments', function (Blueprint $table) {
+            $table->dropColumn('id_member');
         });
     }
 };
